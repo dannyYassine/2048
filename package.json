@@ -1,0 +1,41 @@
+{
+  "name": "tapclicks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server/index.js",
+  "scripts": {
+    "watch": "webpack --watch --config webpack.config.js",
+    "serve": "nodemon src/server/index.js --watch src/website -e css,html",
+    "sync": "browser-sync start --proxy \"localhost:3002\" --files \"src/**/*\"",
+    "nodemon": "nodemon src/server/index.js",
+    "start": "forever src/server/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.0",
+    "ajv": "^5.0.0",
+    "angular": "",
+    "babel-core": "^6.13.2",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^7",
+    "babel-preset-env": "",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-stage-0": "^6.5.0",
+    "body-parser": "",
+    "express": "^4.9.8",
+    "forever": "^0.15.3",
+    "html-loader": "",
+    "lodash": "^4.17.4",
+    "nunjucks": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
+    "gulp-sourcemaps": "^2.6.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "webpack": "^3"
+  }
+}

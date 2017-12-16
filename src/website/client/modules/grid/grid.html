@@ -1,0 +1,28 @@
+<div class="grid-container">
+    <div class="game-grid">
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+        <div class="grid-row"></div>
+    </div>
+    <div class="game-tiles">
+        <div ng-repeat="tile in vm.tiles" class="tile tile-position-{{tile.getX()}}-{{tile.getY()}}">
+            <h3>{{tile.getValue()}}</h3>
+        </div>
+    </div>
+</div>  .generate-y(@x, @i);
