@@ -44,6 +44,47 @@
   }
 }
 
+.tile-fade-in {
+  animation-duration: 0.25s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  -o-animation-timing-function: ease;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-name: tile-fade-in-anim;
+}
+
+@keyframes tile-fade-in-anim {
+  from {
+    opacity: 0;
+    //transform: scale(0.8, 0.8);
+  }
+  to {
+    opacity: 1;
+    //transform: scale(1, 1);
+  }
+}
+
+.tile-merged {
+  animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  -o-animation-timing-function: ease;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-name: tile-fade-in-anim;
+}
+
+@keyframes tile-merged {
+  from {
+    color: red
+  }
+  to {
+    opacity: 1;
+    color: #00ABD6;
+  }
+}
+
 .generate-x(@x, @i: 1) when (@i =< (@x)) {
   .generate-x(@x, @i + 1);
   .generate-y(@x, @i);

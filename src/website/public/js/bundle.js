@@ -62999,7 +62999,7 @@ module.exports = TileComponent;
 /* 94 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tile tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
+module.exports = "<div class=\"tile tile-fade-in tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
 
 /***/ }),
 /* 95 */
@@ -63071,6 +63071,11 @@ const GridController = function ($scope, $document, gameService) {
     vm.swipeLeft = swipeLeft;
     vm.swipeRight = swipeRight;
 
+    /**
+     * Used for throttling
+     */
+    let eventTimeout;
+
     const keyboardKeys = {
         up: 38,
         down: 40,
@@ -63089,40 +63094,66 @@ const GridController = function ($scope, $document, gameService) {
     function _initKeyboardTouchEvents() {
         $document.bind('keydown', function (event) {
             if (keyboardKeys.up === event.which) {
-                gameService.moveUp();
-                event.preventDefault();
+                _checkThrottle(() => {
+                    gameService.moveUp();
+                    event.preventDefault();
+                });
             } else if (keyboardKeys.down === event.which) {
-                gameService.moveDown();
-                event.preventDefault();
+                _checkThrottle(() => {
+                    gameService.moveDown();
+                    event.preventDefault();
+                });
             } else if (keyboardKeys.left === event.which) {
-                gameService.moveLeft();
-                event.preventDefault();
+                _checkThrottle(() => {
+                    gameService.moveLeft();
+                    event.preventDefault();
+                });
             } else if (keyboardKeys.right === event.which) {
-                gameService.moveRight();
-                event.preventDefault();
+                _checkThrottle(() => {
+                    gameService.moveRight();
+                    event.preventDefault();
+                });
             }
             $scope.$apply();
         });
     }
 
+    function _checkThrottle(cb) {
+        if (eventTimeout) {
+            return;
+        }
+        eventTimeout = setTimeout(function () {
+            eventTimeout = null;
+        }, 500);
+        cb();
+    }
+
     function swipeUp() {
-        gameService.moveUp();
-        $scope.$apply();
+        _checkThrottle(() => {
+            gameService.moveUp();
+            $scope.$apply();
+        });
     }
 
     function swipeDown() {
-        gameService.moveDown();
-        $scope.$apply();
+        _checkThrottle(() => {
+            gameService.moveDown();
+            $scope.$apply();
+        });
     }
 
     function swipeLeft() {
-        gameService.moveLeft();
-        $scope.$apply();
+        _checkThrottle(() => {
+            gameService.moveLeft();
+            $scope.$apply();
+        });
     }
 
     function swipeRight() {
-        gameService.moveRight();
-        $scope.$apply();
+        _checkThrottle(() => {
+            gameService.moveRight();
+            $scope.$apply();
+        });
     }
 };
 

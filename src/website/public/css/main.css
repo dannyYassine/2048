@@ -855,6 +855,41 @@ p {
   align-items: center;
   justify-content: center;
 }
+.tile-fade-in {
+  animation-duration: 0.25s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  -o-animation-timing-function: ease;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-name: tile-fade-in-anim;
+}
+@keyframes tile-fade-in-anim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.tile-merged {
+  animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  -o-animation-timing-function: ease;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-name: tile-fade-in-anim;
+}
+@keyframes tile-merged {
+  from {
+    color: red;
+  }
+  to {
+    opacity: 1;
+    color: #00ABD6;
+  }
+}
 .score {
   display: inline-block;
   width: 85px;
