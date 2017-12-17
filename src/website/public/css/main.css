@@ -304,6 +304,50 @@ th {
 .highlight:hover {
   opacity: 1.0;
 }
+.color-2 {
+  background-color: #5C707B;
+  color: #CDC1B4;
+}
+.color-4 {
+  background-color: #42B5A6;
+  color: #CDC1B4;
+}
+.color-8 {
+  background-color: #9D600F;
+  color: #CDC1B4;
+}
+.color-16 {
+  background-color: #B92C92;
+  color: #CDC1B4;
+}
+.color-32 {
+  background-color: #FFD201;
+  color: #CDC1B4;
+}
+.color-64 {
+  background-color: #00ABD6;
+  color: #CDC1B4;
+}
+.color-128 {
+  background-color: #018752;
+  color: #CDC1B4;
+}
+.color-256 {
+  background-color: #FE6D00;
+  color: #CDC1B4;
+}
+.color-512 {
+  background-color: #C6D601;
+  color: #CDC1B4;
+}
+.color-1024 {
+  background-color: #00457C;
+  color: #CDC1B4;
+}
+.color-2048 {
+  background-color: #F3426E;
+  color: #CDC1B4;
+}
 html,
 body {
   background: #FAF8F0;
@@ -380,8 +424,6 @@ input[type=text] {
 }
 .game-tiles .tile {
   position: absolute;
-  background-color: hotpink;
-  color: blue;
   width: 70px;
   height: 70px;
   border-radius: 5px;
@@ -768,6 +810,7 @@ input[type=text] {
   height: 100%;
   width: 100%;
   margin: 0;
+  border-radius: 5px;
   font-size: 20px;
   display: flex;
   align-items: center;

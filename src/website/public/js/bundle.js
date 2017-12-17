@@ -62871,6 +62871,7 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.compone
  * Created by dannyyassine
  */
 
+__webpack_require__(100);
 __webpack_require__(92);
 
 __webpack_require__(96);
@@ -62918,7 +62919,7 @@ module.exports = GridComponent;
 /* 94 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\">\n        <div ng-repeat=\"tile in vm.tiles\" class=\"tile tile-position-{{tile.getX()}}-{{tile.getY()}}\">\n            <h3>{{tile.getValue()}}</h3>\n        </div>\n    </div>\n</div>  .generate-y(@x, @i);\n";
+module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\">\n        <tile ng-repeat=\"tile in vm.tiles\" tile=\"tile\"></tile>\n    </div>\n</div>  .generate-y(@x, @i);\n";
 
 /***/ }),
 /* 95 */
@@ -63036,6 +63037,50 @@ function AppController($scope, gameService) {
 }
 
 module.exports = AppController;
+
+/***/ }),
+/* 100 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__tile_component__);
+/**
+ * Created by dannyyassine
+ */
+
+
+
+__WEBPACK_IMPORTED_MODULE_1__tile_component___default.a.$inject = ['$scope'];
+
+__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('tile', __WEBPACK_IMPORTED_MODULE_1__tile_component___default.a);
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Created by dannyyassine
+ */
+
+const TileComponent = {
+    bindings: {
+        tile: '<'
+    },
+    template: __webpack_require__(102),
+    controllerAs: 'vm'
+};
+
+module.exports = TileComponent;
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"tile tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
 
 /***/ })
 /******/ ]);

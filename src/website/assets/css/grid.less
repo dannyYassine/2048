@@ -22,8 +22,6 @@
 
   .tile {
     position: absolute;
-    background-color: hotpink;
-    color: blue;
     width: 70px;
     height: 70px;
     border-radius: 5px;
@@ -35,6 +33,7 @@
       height: 100%;
       width: 100%;
       margin: 0;
+      border-radius: 5px;
       font-size: 20px;
       display:flex;
       align-items: center;
@@ -42,6 +41,7 @@
     }
   }
 }
+
 
 .generate-x(@x, @i: 1) when (@i =< (@x)) {
   .generate-x(@x, @i + 1);

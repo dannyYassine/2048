@@ -21,8 +21,6 @@
         <div class="grid-row"></div>
     </div>
     <div class="game-tiles">
-        <div ng-repeat="tile in vm.tiles" class="tile tile-position-{{tile.getX()}}-{{tile.getY()}}">
-            <h3>{{tile.getValue()}}</h3>
-        </div>
+        <tile ng-repeat="tile in vm.tiles" tile="tile"></tile>
     </div>
 </div>  .generate-y(@x, @i);
