@@ -27,7 +27,8 @@
     "forever": "^0.15.3",
     "html-loader": "",
     "lodash": "^4.17.4",
-    "nunjucks": "^3.0.1"
+    "nunjucks": "^3.0.1",
+    "sweetalert2": "^7.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",

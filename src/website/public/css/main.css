@@ -361,6 +361,9 @@ body {
 body {
   background: url('../img/amam.png') repeat fixed center;
 }
+*:focus {
+  outline: none;
+}
 .hidden {
   opacity: 0;
 }
@@ -396,11 +399,25 @@ input[type=text] {
 .img-border {
   border: 5px hotpink;
 }
-.soundcloud-blood-orange {
-  color: #ff3300;
+p {
+  font-size: 14px;
+  margin: 0;
 }
-.soundcloud-orange {
-  color: #FF5400;
+.new-game-btn {
+  background-color: #8F7966;
+  color: #F9F6F2;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  height: 40px;
+  width: 120px;
+}
+.tfe-bold {
+  font-weight: 700;
+}
+.title {
+  font-size: 50px;
+  margin: 10px 0;
 }
 .grid-row {
   display: inline;
@@ -413,6 +430,8 @@ input[type=text] {
 }
 .grid-container {
   position: relative;
+  margin: 0 auto;
+  width: 330px;
 }
 .game-grid {
   background-color: #BBADA0;
@@ -822,6 +841,53 @@ input[type=text] {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.score {
+  display: inline-block;
+  width: 85px;
+  height: 60px;
+  background-color: #BBADA0;
+  border-radius: 4px;
+}
+.score .score-title {
+  margin: 5px 0 0 0;
+  padding: 0;
+  display: block;
+  color: #CDC1B4;
+  text-align: center;
+}
+.score .score-points {
+  margin: 0;
+  padding: 0;
+  display: block;
+  color: white;
+  text-align: center;
+}
+.home-header {
+  margin: 10px;
+}
+.title-container {
+  float: left;
+}
+.score-container {
+  float: right;
+  margin: 10px 0;
+}
+.description {
+  float: none;
+  clear: both;
+  margin-bottom: 20px;
+}
+.description .description-left {
+  float: left;
+  width: 60%;
+}
+.description .description-right {
+  float: right;
+}
+.clear-float {
+  float: none;
+  clear: both;
 }
 
 /*# sourceMappingURL=main.css.map */

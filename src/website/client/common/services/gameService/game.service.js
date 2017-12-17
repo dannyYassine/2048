@@ -5,7 +5,7 @@
 import Tile from './../../../model/Tile';
 import randomNumberHelper from './../../helpers/randomNumberHelper';
 
-export default function GameService() {
+export default function GameService($window) {
     /**
      * Placed tiles on screen
      * @type {Array}
@@ -16,7 +16,8 @@ export default function GameService() {
      * Player score
      * @type {number}
      */
-    let currentScore = 4;
+    let currentScore = 0;
+    let highScore = 0;
 
     /**
      * Game variables to keep track of
@@ -44,6 +45,7 @@ export default function GameService() {
     let props = {
         tiles,
         currentScore,
+        highScore,
         isGameOver: gameOver,
     };
 
@@ -115,6 +117,9 @@ export default function GameService() {
                 didTilesMoved = true;
                 nextTile.setValue(tile.getValue() * 2);
                 nextTile.setMerged(true);
+                nextTile.merged = true;
+                nextTile.isMerged = true;
+
                 _deleteTile(tile);
 
                 // let newPosition = tile.getPosition();
@@ -132,6 +137,8 @@ export default function GameService() {
                     finished = true;
                 }
 
+                _verifyHighScore();
+                
             } else {
                 // Move tile
                 //TODO: positon internal not updating
@@ -154,6 +161,13 @@ export default function GameService() {
         tiles.sort((a, b) => {
             if (a.x === b.x) return a.y - b.y;
             return a.x - b.x;
+        });
+
+        tiles.forEach((tile) => {
+            //TODO:
+            tile.setMerged(false);
+            tile.merged = false;
+            tile.isMerged = false;
         });
     }
     
@@ -349,8 +363,6 @@ export default function GameService() {
 
         tiles.push(tile1);
         tiles.push(tile2);
-
-        props.currentScore = 4;
     }
 
     /**
@@ -360,6 +372,7 @@ export default function GameService() {
     function _initGame() {
         _resetAvailableTiles();
         _placeStarterTiles();
+        _loadHighScore();
     }
 
     function _getTileIndex(tile) {
@@ -386,6 +399,23 @@ export default function GameService() {
                 tiles.splice(index, 1);
                 break;
             }
+        }
+    }
+
+    function _loadHighScore() {
+        props.highScore = $window.localStorage.getItem('tfe.highScore') || 0;
+    }
+
+    function _verifyHighScore() {
+        let localHighScore = $window.localStorage.getItem('tfe.highScore');
+        if (!localHighScore) {
+            $window.localStorage.setItem('tfe.highScore', props.currentScore);
+            props.highScore = props.currentScore;
+            return;
+        }
+        if (props.highScore <= props.currentScore) {
+            $window.localStorage.setItem('tfe.highScore', props.currentScore);
+            props.highScore = props.currentScore;
         }
     }
     

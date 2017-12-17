@@ -9,6 +9,9 @@ body {
   background: url('../img/amam.png') repeat fixed center;
 }
 
+*:focus {
+  outline: none;
+}
 
 .hidden {
   opacity: 0;
@@ -42,10 +45,26 @@ h1, h2, h3, h4, h5, h6, a, p, input[type=text] {
   border: 5px hotpink;
 }
 
-.soundcloud-blood-orange {
-  color: #ff3300;
+p {
+  font-size: 14px;
+  margin: 0;
 }
 
-.soundcloud-orange {
-  color: #FF5400;
+.new-game-btn {
+  background-color: @tfe-brown;
+  color: @tfe-white;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  height: 40px;
+  width: 120px;
+}
+
+.tfe-bold {
+  font-weight: 700;
+}
+
+.title {
+  font-size: 50px;
+  margin: 10px 0;
 }

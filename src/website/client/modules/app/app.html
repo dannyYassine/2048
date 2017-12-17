@@ -3,8 +3,25 @@
         GAME OVER
     </div>
     <div class="main-content-layout home">
-        <h1 class="title-color">2048</h1>
-        <h2>{{vm.props.currentScore}}</h2>
-        <grid></grid>
+        <div class="home-header">
+            <div class="title-container">
+                <h1 class="title title-color">2048</h1>
+            </div>
+            <div class="score-container">
+                <div dy-score points="vm.props.currentScore" title="SCORE"></div>
+                <div dy-score points="vm.props.highScore" title="BEST"></div>
+            </div>
+            <div class="description">
+                <div class="description-left">
+                    <p class="tfe-bold">Play 2048 Game Online</p>
+                    <p>Join the numbers and get to the <span class="tfe-bold">2048 tile!</span></p>
+                </div>
+                <div class="description-right">
+                    <button class="new-game-btn">NEW GAME</button>
+                </div>
+            <div class="clear-float"></div>
+            </div>
+            <grid></grid>
+        </div>
     </div>
 </div>

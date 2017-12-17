@@ -2,6 +2,8 @@
 
 .grid-container {
   position: relative;
+  margin: 0 auto;
+  width: 330px;
 }
 
 .game-grid {
@@ -41,7 +43,6 @@
     }
   }
 }
-
 
 .generate-x(@x, @i: 1) when (@i =< (@x)) {
   .generate-x(@x, @i + 1);
