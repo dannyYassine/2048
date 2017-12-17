@@ -8231,7 +8231,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_swipe__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_swipe__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_swipe___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular_swipe__);
 /**
  * Created by dannyyassine
@@ -8241,17 +8241,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-__webpack_require__(79);
-__webpack_require__(82);
-__webpack_require__(83);
-__webpack_require__(90);
+__webpack_require__(80);
+__webpack_require__(86);
+__webpack_require__(87);
+__webpack_require__(94);
 
 /**
  * Set Angular client
  */
 let app = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight', [__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default.a, 'swipe', 'twentyFortyEight.services', 'twentyFortyEight.components', 'twentyFortyEight.filters', 'twentyFortyEight.directives']);
 
-__webpack_require__(91);
+__webpack_require__(95);
 
 /**
  * Build config phase
@@ -45126,6 +45126,207 @@ exports.UIRouterPluginBase = UIRouterPluginBase;
 
 /***/ }),
 /* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _angular = __webpack_require__(4);
+
+exports.default = (0, _angular.module)('swipe', []).factory('swipe', function () {
+  var MOVE_BUFFER_RADIUS = 40;
+  var MAX_RATIO = 0.3;
+
+  var POINTER_EVENTS = {
+    'mouse': {
+      start: 'mousedown',
+      move: 'mousemove',
+      end: 'mouseup'
+    },
+    'touch': {
+      start: 'touchstart',
+      move: 'touchmove',
+      end: 'touchend',
+      cancel: 'touchcancel'
+    }
+  };
+
+  function getCoordinates(event) {
+    var originalEvent = event.originalEvent || event;
+    var touches = originalEvent.touches && originalEvent.touches.length ? originalEvent.touches : [originalEvent];
+    var e = originalEvent.changedTouches && originalEvent.changedTouches[0] || touches[0];
+
+    return {
+      x: e.clientX,
+      y: e.clientY
+    };
+  }
+
+  function getEvents(pointerTypes, eventType) {
+    var res = [];
+    angular.forEach(pointerTypes, function (pointerType) {
+      var eventName = POINTER_EVENTS[pointerType][eventType];
+      if (eventName) {
+        res.push(eventName);
+      }
+    });
+    return res.join(' ');
+  }
+
+  return {
+
+    bind: function bind(element, eventHandlers, pointerTypes) {
+
+      // Absolute total movement
+      var totalX, totalY;
+      // Coordinates of the start position.
+      var startCoords;
+      var lastPos;
+      // Whether a swipe is active.
+      var active = false;
+      // Decide where we are going
+      var isDecided = false;
+      var isVertical = true;
+
+      pointerTypes = pointerTypes || ['mouse', 'touch'];
+
+      element.on(getEvents(pointerTypes, 'start'), function (event) {
+        startCoords = getCoordinates(event);
+        active = true;
+        totalX = 0;
+        totalY = 0;
+        isDecided = false;
+        isVertical = true;
+        lastPos = startCoords;
+        eventHandlers['start'] && eventHandlers['start'](startCoords, event);
+      });
+
+      element.on(getEvents(pointerTypes, 'cancel'), function (event) {
+        active = false;
+        eventHandlers['cancel'] && eventHandlers['cancel'](event);
+      });
+
+      element.on(getEvents(pointerTypes, 'move'), function (event) {
+
+        if (!active) {
+          return;
+        }
+
+        if (!startCoords) {
+          return;
+        }
+
+        var coords = getCoordinates(event);
+
+        totalX += Math.abs(coords.x - lastPos.x);
+        totalY += Math.abs(coords.y - lastPos.y);
+
+        lastPos = coords;
+
+        if (totalX < MOVE_BUFFER_RADIUS && totalY < MOVE_BUFFER_RADIUS) {
+          return;
+        } else {
+          if (!isDecided) {
+
+            var deltaX, deltaY, ratio;
+
+            deltaX = Math.abs(coords.x - startCoords.x);
+            deltaY = Math.abs(coords.y - startCoords.y);
+
+            ratio = deltaY / deltaX;
+
+            if (ratio < MAX_RATIO) {
+              event.preventDefault();
+              isVertical = false;
+            } else {
+              isVertical = true;
+            }
+
+            isDecided = true;
+          }
+        }
+
+        event.isVertical = isVertical;
+        eventHandlers['move'] && eventHandlers['move'](coords, event);
+      });
+
+      element.on(getEvents(pointerTypes, 'end'), function (event) {
+        if (!active) {
+          return;
+        }
+        event.isVertical = isVertical;
+        active = false;
+        eventHandlers['end'] && eventHandlers['end'](getCoordinates(event), event);
+      });
+    }
+  };
+}).directive('ngSwipeLeft', makeSwipeDirective('ngSwipeLeft', -1, false, 'swipeleft')).directive('ngSwipeRight', makeSwipeDirective('ngSwipeRight', 1, false, 'swiperight')).directive('ngSwipeUp', makeSwipeDirective('ngSwipeUp', -1, true, 'swipeup')).directive('ngSwipeDown', makeSwipeDirective('ngSwipeDown', 1, true, 'swipedown'));
+
+function makeSwipeDirective(directiveName, direction, axis, eventName) {
+  return ['$parse', 'swipe', function ($parse, swipe) {
+    var MAX_OTHER_AXIS_DISTANCE = 75,
+        MAX_RATIO = 0.3,
+        MIN_DISTANCE = 30;
+
+    return function (scope, element, attr) {
+      var swipeHandler = $parse(attr[directiveName]);
+      var startCoords = undefined,
+          valid = undefined;
+
+      function validSwipe(coords) {
+        if (!startCoords || !valid) {
+          return false;
+        }
+
+        var deltaY = (coords.y - startCoords.y) * direction;
+        var deltaX = (coords.x - startCoords.x) * direction;
+
+        if (!axis) {
+          // horizontal swipe
+          return Math.abs(deltaY) < MAX_OTHER_AXIS_DISTANCE && deltaX > 0 && deltaX > MIN_DISTANCE && Math.abs(deltaY) / deltaX < MAX_RATIO;
+        } else {
+          // vertical swipe
+          return Math.abs(deltaX) < MAX_OTHER_AXIS_DISTANCE && deltaY > 0 && deltaY > MIN_DISTANCE && Math.abs(deltaX) / deltaY < MAX_RATIO;
+        }
+      }
+
+      var pointerTypes = ['touch'];
+
+      if (!angular.isDefined(attr['ngSwipeDisableMouse'])) {
+        pointerTypes.push('mouse');
+      }
+
+      swipe.bind(element, {
+        'start': function start(coords, event) {
+          var className = event.target.getAttribute('class');
+          if (axis && (!className || className && className.match('noPreventDefault') === null)) {
+            event.preventDefault();
+          }
+          startCoords = coords;
+          valid = true;
+        },
+        'cancel': function cancel() {
+          valid = false;
+        },
+        'end': function end(coords, event) {
+          if (validSwipe(coords)) {
+            scope.$apply(function () {
+              element.triggerHandler(eventName);
+              swipeHandler(scope, { $event: event });
+            });
+          }
+        }
+      }, pointerTypes);
+    };
+  }];
+}
+
+/***/ }),
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45140,11 +45341,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.directives', []);
 
-__webpack_require__(80);
-__webpack_require__(103);
+__webpack_require__(81);
+__webpack_require__(83);
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -45152,12 +45353,12 @@ __webpack_require__(103);
  */
 const angular = __webpack_require__(4);
 
-const FadeDirective = __webpack_require__(81);
+const FadeDirective = __webpack_require__(82);
 
 angular.module('twentyFortyEight.directives').directive('dyFade', FadeDirective);
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 /**
@@ -45185,7 +45386,52 @@ const FadeDirective = function () {
 module.exports = FadeDirective;
 
 /***/ }),
-/* 82 */
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Created by dannyyassine
+ */
+const angular = __webpack_require__(4);
+const ScoreDirective = __webpack_require__(84);
+
+angular.module('twentyFortyEight.directives').directive('dyScore', ScoreDirective);
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Created by dannyyassine
+ */
+
+const ScoreDirective = function () {
+    let directive = {
+        link: link,
+        restrict: 'EA',
+        replace: true,
+        scope: {
+            title: "@",
+            points: "<"
+        },
+        template: __webpack_require__(85)
+    };
+
+    function link(scope, element, attr) {}
+
+    return directive;
+};
+
+module.exports = ScoreDirective;
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"score\">\n    <h5 class=\"score-title\">{{title}}</h5>\n    <h2 class=\"score-points\">{{points}}</h2>\n</div>";
+
+/***/ }),
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45201,14 +45447,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.filters', []);
 
 /***/ }),
-/* 83 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 /**
  * Created by dannyyassine
@@ -45218,10 +45464,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 let twentyFortyEightServices = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.services', []);
 
-__webpack_require__(86);
+__webpack_require__(90);
 
 /***/ }),
-/* 84 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -62310,10 +62556,10 @@ __webpack_require__(86);
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27), __webpack_require__(85)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27), __webpack_require__(89)(module)))
 
 /***/ }),
-/* 85 */
+/* 89 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -62341,14 +62587,14 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 86 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_service__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_service__ = __webpack_require__(91);
 /**
  * Created by dannyyassine
  */
@@ -62360,13 +62606,13 @@ __WEBPACK_IMPORTED_MODULE_1__game_service__["a" /* default */].$inject = ['$wind
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.services').service('gameService', __WEBPACK_IMPORTED_MODULE_1__game_service__["a" /* default */]);
 
 /***/ }),
-/* 87 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = GameService;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model_Tile__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model_Tile__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__ = __webpack_require__(93);
 /**
  * Created by dannyyassine
  */
@@ -62831,7 +63077,7 @@ function GameService($window) {
 };
 
 /***/ }),
-/* 88 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62913,7 +63159,7 @@ const Tile = function (point, initialPosition, didMerged) {
 /* harmony default export */ __webpack_exports__["a"] = (Tile);
 
 /***/ }),
-/* 89 */
+/* 93 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62929,7 +63175,7 @@ const randomNumberHelper = function (leftBound, rightBound) {
 /* harmony default export */ __webpack_exports__["a"] = (randomNumberHelper);
 
 /***/ }),
-/* 90 */
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62945,40 +63191,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.components', []);
 
 /***/ }),
-/* 91 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * Created by dannyyassine
  */
 
-__webpack_require__(92);
-__webpack_require__(95);
-
+__webpack_require__(96);
 __webpack_require__(99);
 
+__webpack_require__(103);
+
 /***/ }),
-/* 92 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__tile_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tile_controller__ = __webpack_require__(108);
 /**
  * Created by dannyyassine
  */
 
 
 
-__WEBPACK_IMPORTED_MODULE_1__tile_component___default.a.$inject = ['$scope'];
+
+__WEBPACK_IMPORTED_MODULE_1__tile_component___default.a.$inject = ['$timeout'];
+__WEBPACK_IMPORTED_MODULE_1__tile_component___default.a.controller = __WEBPACK_IMPORTED_MODULE_2__tile_controller__["a" /* default */];
 
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('tile', __WEBPACK_IMPORTED_MODULE_1__tile_component___default.a);
 
 /***/ }),
-/* 93 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -62989,29 +63238,29 @@ const TileComponent = {
     bindings: {
         tile: '<'
     },
-    template: __webpack_require__(94),
+    template: __webpack_require__(98),
     controllerAs: 'vm'
 };
 
 module.exports = TileComponent;
 
 /***/ }),
-/* 94 */
+/* 98 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tile tile-fade-in tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
+module.exports = "<div class=\"tile tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
 
 /***/ }),
-/* 95 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__grid_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__grid_controller__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__grid_controller__ = __webpack_require__(102);
 /**
  * Created by dannyyassine
  */
@@ -63026,7 +63275,7 @@ __WEBPACK_IMPORTED_MODULE_1__grid_component___default.a.$inject = ['$scope', '$d
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('grid', __WEBPACK_IMPORTED_MODULE_1__grid_component___default.a);
 
 /***/ }),
-/* 96 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -63037,20 +63286,20 @@ const GridComponent = {
     bindings: {
         keysEnabled: '<'
     },
-    template: __webpack_require__(97),
+    template: __webpack_require__(101),
     controllerAs: 'vm'
 };
 
 module.exports = GridComponent;
 
 /***/ }),
-/* 97 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\"\n         ng-swipe-up=\"vm.swipeUp()\"\n         ng-swipe-down=\"vm.swipeDown()\"\n         ng-swipe-left=\"vm.swipeLeft()\"\n         ng-swipe-right=\"vm.swipeRight()\"\n    >\n        <tile ng-repeat=\"tile in vm.tiles\" tile=\"tile\"></tile>\n    </div>\n</div>\n";
 
 /***/ }),
-/* 98 */
+/* 102 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63093,6 +63342,9 @@ const GridController = function ($scope, $document, gameService) {
 
     function _initKeyboardTouchEvents() {
         $document.bind('keydown', function (event) {
+            if (gameService.props.gameOver) {
+                return;
+            }
             if (keyboardKeys.up === event.which) {
                 _checkThrottle(() => {
                     gameService.moveUp();
@@ -63119,12 +63371,12 @@ const GridController = function ($scope, $document, gameService) {
     }
 
     function _checkThrottle(cb) {
-        if (eventTimeout) {
-            return;
-        }
-        eventTimeout = setTimeout(function () {
-            eventTimeout = null;
-        }, 500);
+        // if (eventTimeout) {
+        //     return;
+        // }
+        // eventTimeout = setTimeout(function() {
+        //     eventTimeout = null;
+        // }, 0);
         cb();
     }
 
@@ -63160,16 +63412,16 @@ const GridController = function ($scope, $document, gameService) {
 /* harmony default export */ __webpack_exports__["a"] = (GridController);
 
 /***/ }),
-/* 99 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__app_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(106);
 /**
  * Created by dannyyassine
  */
@@ -63183,7 +63435,7 @@ __WEBPACK_IMPORTED_MODULE_2__app_controller__["a" /* default */].$inject = ['$sc
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('app', __WEBPACK_IMPORTED_MODULE_1__app_component___default.a);
 
 /***/ }),
-/* 100 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -63191,18 +63443,18 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').compo
  */
 
 module.exports = {
-  template: __webpack_require__(101),
+  template: __webpack_require__(105),
   controllerAs: 'vm'
 };
 
 /***/ }),
-/* 101 */
+/* 105 */
 /***/ (function(module, exports) {
 
 module.exports = "<div>\n    <div ng-if=\"vm.props.gameOver == true\">\n        {{vm.onGameOver()}}\n    </div>\n    <div ng-if=\"vm.props.finished == true\">\n        {{vm.playerWon()}}\n    </div>\n    <div class=\"main-content-layout home\">\n        <div class=\"home-header\">\n            <div class=\"title-container\">\n                <h1 class=\"title title-color\">2048</h1>\n            </div>\n            <div class=\"score-container\">\n                <div dy-score points=\"vm.props.currentScore\" title=\"SCORE\"></div>\n                <div dy-score points=\"vm.props.highScore\" title=\"BEST\"></div>\n            </div>\n            <div class=\"description\">\n                <div class=\"description-left\">\n                    <p class=\"tfe-bold\">Play 2048 Game Online</p>\n                    <p>Join the numbers and get to the <span class=\"tfe-bold\">2048 tile!</span></p>\n                </div>\n                <div class=\"description-right\">\n                    <button class=\"new-game-btn\" ng-click=\"vm.onNewGameClicked()\">NEW GAME</button>\n                </div>\n            <div class=\"clear-float\"></div>\n            </div>\n            <grid keysEnabled=\"vm.keyboardEnabled\"></grid>\n        </div>\n        <div class=\"footer\">\n            <div class=\"danny-yassine-container\">\n                <a href=\"https://www.linkedin.com/in/danny-yassine-1837a240/\" target=\"_blank\">\n                    Danny Yassine\n                </a>\n            </div>\n            <div class=\"github-img-container\">\n                <a href=\"https://github.com/dannyYassine/2048\" target=\"_blank\">\n                    <img class=\"github-img\" src=\"/img/github.png\"/>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>";
 
 /***/ }),
-/* 102 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63296,52 +63548,6 @@ function AppController($scope, gameService) {
 }
 
 /***/ }),
-/* 103 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Created by dannyyassine
- */
-const angular = __webpack_require__(4);
-const ScoreDirective = __webpack_require__(104);
-
-angular.module('twentyFortyEight.directives').directive('dyScore', ScoreDirective);
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Created by dannyyassine
- */
-
-const ScoreDirective = function () {
-    let directive = {
-        link: link,
-        restrict: 'EA',
-        replace: true,
-        scope: {
-            title: "@",
-            points: "<"
-        },
-        template: __webpack_require__(105)
-    };
-
-    function link(scope, element, attr) {}
-
-    return directive;
-};
-
-module.exports = ScoreDirective;
-
-/***/ }),
-/* 105 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"score\">\n    <h5 class=\"score-title\">{{title}}</h5>\n    <h2 class=\"score-points\">{{points}}</h2>\n</div>";
-
-/***/ }),
-/* 106 */,
 /* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -65219,203 +65425,16 @@ if (typeof window !== 'undefined' && window.Sweetalert2) window.sweetAlert = win
 
 /***/ }),
 /* 108 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/**
+ * Created by dannyyassine
+ */
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _angular = __webpack_require__(4);
-
-exports.default = (0, _angular.module)('swipe', []).factory('swipe', function () {
-  var MOVE_BUFFER_RADIUS = 40;
-  var MAX_RATIO = 0.3;
-
-  var POINTER_EVENTS = {
-    'mouse': {
-      start: 'mousedown',
-      move: 'mousemove',
-      end: 'mouseup'
-    },
-    'touch': {
-      start: 'touchstart',
-      move: 'touchmove',
-      end: 'touchend',
-      cancel: 'touchcancel'
-    }
-  };
-
-  function getCoordinates(event) {
-    var originalEvent = event.originalEvent || event;
-    var touches = originalEvent.touches && originalEvent.touches.length ? originalEvent.touches : [originalEvent];
-    var e = originalEvent.changedTouches && originalEvent.changedTouches[0] || touches[0];
-
-    return {
-      x: e.clientX,
-      y: e.clientY
-    };
-  }
-
-  function getEvents(pointerTypes, eventType) {
-    var res = [];
-    angular.forEach(pointerTypes, function (pointerType) {
-      var eventName = POINTER_EVENTS[pointerType][eventType];
-      if (eventName) {
-        res.push(eventName);
-      }
-    });
-    return res.join(' ');
-  }
-
-  return {
-
-    bind: function bind(element, eventHandlers, pointerTypes) {
-
-      // Absolute total movement
-      var totalX, totalY;
-      // Coordinates of the start position.
-      var startCoords;
-      var lastPos;
-      // Whether a swipe is active.
-      var active = false;
-      // Decide where we are going
-      var isDecided = false;
-      var isVertical = true;
-
-      pointerTypes = pointerTypes || ['mouse', 'touch'];
-
-      element.on(getEvents(pointerTypes, 'start'), function (event) {
-        startCoords = getCoordinates(event);
-        active = true;
-        totalX = 0;
-        totalY = 0;
-        isDecided = false;
-        isVertical = true;
-        lastPos = startCoords;
-        eventHandlers['start'] && eventHandlers['start'](startCoords, event);
-      });
-
-      element.on(getEvents(pointerTypes, 'cancel'), function (event) {
-        active = false;
-        eventHandlers['cancel'] && eventHandlers['cancel'](event);
-      });
-
-      element.on(getEvents(pointerTypes, 'move'), function (event) {
-
-        if (!active) {
-          return;
-        }
-
-        if (!startCoords) {
-          return;
-        }
-
-        var coords = getCoordinates(event);
-
-        totalX += Math.abs(coords.x - lastPos.x);
-        totalY += Math.abs(coords.y - lastPos.y);
-
-        lastPos = coords;
-
-        if (totalX < MOVE_BUFFER_RADIUS && totalY < MOVE_BUFFER_RADIUS) {
-          return;
-        } else {
-          if (!isDecided) {
-
-            var deltaX, deltaY, ratio;
-
-            deltaX = Math.abs(coords.x - startCoords.x);
-            deltaY = Math.abs(coords.y - startCoords.y);
-
-            ratio = deltaY / deltaX;
-
-            if (ratio < MAX_RATIO) {
-              event.preventDefault();
-              isVertical = false;
-            } else {
-              isVertical = true;
-            }
-
-            isDecided = true;
-          }
-        }
-
-        event.isVertical = isVertical;
-        eventHandlers['move'] && eventHandlers['move'](coords, event);
-      });
-
-      element.on(getEvents(pointerTypes, 'end'), function (event) {
-        if (!active) {
-          return;
-        }
-        event.isVertical = isVertical;
-        active = false;
-        eventHandlers['end'] && eventHandlers['end'](getCoordinates(event), event);
-      });
-    }
-  };
-}).directive('ngSwipeLeft', makeSwipeDirective('ngSwipeLeft', -1, false, 'swipeleft')).directive('ngSwipeRight', makeSwipeDirective('ngSwipeRight', 1, false, 'swiperight')).directive('ngSwipeUp', makeSwipeDirective('ngSwipeUp', -1, true, 'swipeup')).directive('ngSwipeDown', makeSwipeDirective('ngSwipeDown', 1, true, 'swipedown'));
-
-function makeSwipeDirective(directiveName, direction, axis, eventName) {
-  return ['$parse', 'swipe', function ($parse, swipe) {
-    var MAX_OTHER_AXIS_DISTANCE = 75,
-        MAX_RATIO = 0.3,
-        MIN_DISTANCE = 30;
-
-    return function (scope, element, attr) {
-      var swipeHandler = $parse(attr[directiveName]);
-      var startCoords = undefined,
-          valid = undefined;
-
-      function validSwipe(coords) {
-        if (!startCoords || !valid) {
-          return false;
-        }
-
-        var deltaY = (coords.y - startCoords.y) * direction;
-        var deltaX = (coords.x - startCoords.x) * direction;
-
-        if (!axis) {
-          // horizontal swipe
-          return Math.abs(deltaY) < MAX_OTHER_AXIS_DISTANCE && deltaX > 0 && deltaX > MIN_DISTANCE && Math.abs(deltaY) / deltaX < MAX_RATIO;
-        } else {
-          // vertical swipe
-          return Math.abs(deltaX) < MAX_OTHER_AXIS_DISTANCE && deltaY > 0 && deltaY > MIN_DISTANCE && Math.abs(deltaX) / deltaY < MAX_RATIO;
-        }
-      }
-
-      var pointerTypes = ['touch'];
-
-      if (!angular.isDefined(attr['ngSwipeDisableMouse'])) {
-        pointerTypes.push('mouse');
-      }
-
-      swipe.bind(element, {
-        'start': function start(coords, event) {
-          var className = event.target.getAttribute('class');
-          if (axis && (!className || className && className.match('noPreventDefault') === null)) {
-            event.preventDefault();
-          }
-          startCoords = coords;
-          valid = true;
-        },
-        'cancel': function cancel() {
-          valid = false;
-        },
-        'end': function end(coords, event) {
-          if (validSwipe(coords)) {
-            scope.$apply(function () {
-              element.triggerHandler(eventName);
-              swipeHandler(scope, { $event: event });
-            });
-          }
-        }
-      }, pointerTypes);
-    };
-  }];
+/* harmony default export */ __webpack_exports__["a"] = (TileController);
+function TileController($timeout) {
+  let vm = this;
 }
 
 /***/ })

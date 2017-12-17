@@ -3,8 +3,10 @@
  */
 import angular from 'angular';
 import TileComponent from './tile.component';
+import TileController from './tile.controller';
 
-TileComponent.$inject = ['$scope'];
+TileComponent.$inject = ['$timeout'];
+TileComponent.controller = TileController;
 
 angular.module('twentyFortyEight')
     .component('tile', TileComponent);

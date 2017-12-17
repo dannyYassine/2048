@@ -37,6 +37,9 @@ const GridController = function ($scope, $document, gameService) {
     
     function _initKeyboardTouchEvents() {
         $document.bind('keydown', function(event) {
+            if (gameService.props.gameOver) {
+                return;
+            }
             if (keyboardKeys.up === event.which) {
                 _checkThrottle(() => {
                     gameService.moveUp();
@@ -63,12 +66,12 @@ const GridController = function ($scope, $document, gameService) {
     }
 
     function _checkThrottle(cb) {
-        if (eventTimeout) {
-            return;
-        }
-        eventTimeout = setTimeout(function() {
-            eventTimeout = null;
-        }, 500);
+        // if (eventTimeout) {
+        //     return;
+        // }
+        // eventTimeout = setTimeout(function() {
+        //     eventTimeout = null;
+        // }, 0);
         cb();
     }
 
