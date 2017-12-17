@@ -968,12 +968,20 @@ __export(__webpack_require__(14));
 __export(__webpack_require__(2));
 __export(__webpack_require__(1));
 __export(__webpack_require__(21));
-__export(__webpack_require__(5));
+__export(__webpack_require__(6));
 __export(__webpack_require__(7));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(56);
+module.exports = angular;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1137,14 +1145,6 @@ exports.joinNeighborsR = joinNeighborsR;
 //# sourceMappingURL=strings.js.map
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(56);
-module.exports = angular;
-
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1188,7 +1188,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */ /** for typedoc */
 var hof_1 = __webpack_require__(2);
 var predicates_1 = __webpack_require__(1);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 /** @hidden */
 function uiViewString(uiview) {
     if (!uiview)
@@ -1423,7 +1423,7 @@ var TransitionHookScope;
  */ /** for typedoc */
 Object.defineProperty(exports, "__esModule", { value: true });
 var predicates_1 = __webpack_require__(1);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 var common_1 = __webpack_require__(4);
 /**
  * Encapsulate the target (destination) state/params/options of a [[Transition]].
@@ -1782,7 +1782,7 @@ exports.Param = Param;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = __webpack_require__(0);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 var hof_1 = __webpack_require__(2);
 var RejectType;
 (function (RejectType) {
@@ -1879,7 +1879,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /** for typedoc */
 var interface_1 = __webpack_require__(8);
 var common_1 = __webpack_require__(0);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 var predicates_1 = __webpack_require__(1);
 var hof_1 = __webpack_require__(2);
 var trace_1 = __webpack_require__(7);
@@ -2110,7 +2110,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = __webpack_require__(0);
 var coreservices_1 = __webpack_require__(3);
 var trace_1 = __webpack_require__(7);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 var predicates_1 = __webpack_require__(1);
 var common_2 = __webpack_require__(4);
 // TODO: explicitly make this user configurable
@@ -2339,7 +2339,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /** for typedoc */
 var trace_1 = __webpack_require__(7);
 var coreservices_1 = __webpack_require__(3);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 var common_1 = __webpack_require__(0);
 var predicates_1 = __webpack_require__(1);
 var hof_1 = __webpack_require__(2);
@@ -3156,7 +3156,7 @@ var coreservices_1 = __webpack_require__(3);
 var interface_1 = __webpack_require__(29);
 var resolvable_1 = __webpack_require__(13);
 var pathFactory_1 = __webpack_require__(16);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 var common_2 = __webpack_require__(4);
 var whens = interface_1.resolvePolicies.when;
 var ALL_WHENS = [whens.EAGER, whens.LAZY];
@@ -3363,7 +3363,7 @@ var common_1 = __webpack_require__(0);
 var hof_1 = __webpack_require__(2);
 var predicates_1 = __webpack_require__(1);
 var param_1 = __webpack_require__(10);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 /** @hidden */
 function quoteRegExp(string, param) {
     var surroundPattern = ['', ''], result = string.replace(/[\\\[\]\^$*+?.()|{}]/g, "\\$&");
@@ -5188,7 +5188,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /** @module state */ /** for typedoc */
 var common_1 = __webpack_require__(0);
 var predicates_1 = __webpack_require__(1);
-var strings_1 = __webpack_require__(5);
+var strings_1 = __webpack_require__(6);
 var hof_1 = __webpack_require__(2);
 var resolvable_1 = __webpack_require__(13);
 var coreservices_1 = __webpack_require__(3);
@@ -8227,7 +8227,7 @@ __webpack_require__(55);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__);
@@ -8241,14 +8241,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(79);
 __webpack_require__(82);
 __webpack_require__(83);
-__webpack_require__(86);
+__webpack_require__(90);
 
 /**
  * Set Angular client
  */
 let app = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight', [__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default.a, 'twentyFortyEight.services', 'twentyFortyEight.components', 'twentyFortyEight.filters', 'twentyFortyEight.directives']);
 
-__webpack_require__(87);
+__webpack_require__(91);
 
 /**
  * Build config phase
@@ -42487,7 +42487,7 @@ $provide.value("$locale", {
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(6), __webpack_require__(58)) :
+	 true ? factory(exports, __webpack_require__(5), __webpack_require__(58)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'angular', '@uirouter/core'], factory) :
 	(factory((global['@uirouter/angularjs'] = {}),global.angular,global['@uirouter/core']));
 }(this, (function (exports,ng_from_import,core) { 'use strict';
@@ -45127,7 +45127,7 @@ exports.UIRouterPluginBase = UIRouterPluginBase;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /**
  * Created by dannyyassine
@@ -45146,7 +45146,7 @@ __webpack_require__(80);
 /**
  * Created by dannyyassine
  */
-const angular = __webpack_require__(6);
+const angular = __webpack_require__(5);
 
 const FadeDirective = __webpack_require__(81);
 
@@ -45186,7 +45186,7 @@ module.exports = FadeDirective;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /**
  * Created by dannyyassine
@@ -45202,7 +45202,7 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.filters
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
@@ -45214,7 +45214,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 let twentyFortyEightServices = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.services', []);
 
-__webpack_require__(97);
+__webpack_require__(86);
 
 /***/ }),
 /* 84 */
@@ -62342,7 +62342,518 @@ module.exports = function(module) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_service__ = __webpack_require__(87);
+/**
+ * Created by dannyyassine
+ */
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.services').service('gameService', __WEBPACK_IMPORTED_MODULE_1__game_service__["a" /* default */]);
+
+/***/ }),
+/* 87 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = GameService;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model_Tile__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__ = __webpack_require__(89);
+/**
+ * Created by dannyyassine
+ */
+
+
+
+
+function GameService() {
+    /**
+     * Placed tiles on screen
+     * @type {Array}
+     */
+    let tiles = [];
+
+    /**
+     * Player score
+     * @type {number}
+     */
+    let currentScore = 4;
+
+    /**
+     * Game variables to keep track of
+     * @type {boolean}
+     */
+    let gameOver = false;
+    let finished = false;
+    let scoreToWin = 2048;
+
+    /**
+     * Game grid size
+     * @type {number}
+     */
+    let gameSize = 4;
+
+    /**
+     * Available tiles spaces to put new tiles on screen
+     * @type {Array}
+     */
+    let availableTiles = [];
+
+    /**
+     * Module
+     */
+    let props = {
+        tiles,
+        currentScore,
+        isGameOver: gameOver
+    };
+
+    return {
+        props: props,
+        startGame: startNewGame,
+        moveUp: moveUp,
+        moveDown: moveDown,
+        moveLeft: moveLeft,
+        moveRight: moveRight
+    };
+
+    /**
+     * Methods
+     */
+
+    function startNewGame() {
+        _initGame();
+    }
+
+    function moveUp() {
+        _handleMove({ x: 0, y: -1 });
+    }
+
+    function moveDown() {
+        _handleMove({ x: 0, y: 1 });
+    }
+
+    function moveLeft() {
+        _handleMove({ x: -1, y: 0 });
+    }
+
+    function moveRight() {
+        _handleMove({ x: 1, y: 0 });
+    }
+
+    function _handleMove(direction) {
+        let didTilesMoved = true;
+
+        _setupBeforeMove();
+        let ordered = _orderedTilesWithDirection(direction);
+
+        for (let tileIndex in ordered) {
+            let tile = _tileAtPosition(ordered[tileIndex]);
+            let newPosition = ordered[tileIndex];
+
+            let isAllowed = true;
+            let isWithinBounds = true;
+            let nextTile = null;
+
+            while (isWithinBounds && isAllowed) {
+                let tempPosition = { x: newPosition.x + direction.x, y: newPosition.y + direction.y };
+                if (tempPosition.x > 4 || tempPosition.x < 1) {
+                    isWithinBounds = false;
+                }
+                if (tempPosition.y > 4 || tempPosition.y < 1) {
+                    isWithinBounds = false;
+                }
+                isAllowed = _isAllowedToMoveAt(tempPosition);
+                if (isWithinBounds && isAllowed) {
+                    newPosition = tempPosition;
+                }
+            }
+
+            let tempPosition = { x: newPosition.x + direction.x, y: newPosition.y + direction.y };
+            nextTile = _tileAtPosition(tempPosition);
+
+            if (nextTile && nextTile.getValue() === tile.getValue() && !nextTile.isMerged) {
+                didTilesMoved = true;
+                nextTile.setValue(tile.getValue() * 2);
+                nextTile.setMerged(true);
+                _deleteTile(tile);
+
+                // let newPosition = tile.getPosition();
+                // let newTile = Tile(updatedValue, {x: newPosition.x, y: newPosition.y}, true);
+
+                // tiles.push(newTile);
+
+                // newTile.setPosition(newPosition);
+                // newTile.x = newPosition.x;
+                // newTile.y = newPosition.y;
+
+                props.currentScore += nextTile.getValue();
+
+                if (currentScore >= scoreToWin) {
+                    finished = true;
+                }
+            } else {
+                // Move tile
+                //TODO: positon internal not updating
+                tile.setPosition(newPosition);
+                tile.x = newPosition.x;
+                tile.y = newPosition.y;
+            }
+        }
+
+        // verify game
+        if (didTilesMoved) {
+            _placeNewRandomTile();
+        }
+    }
+
+    function _setupBeforeMove() {
+        tiles.sort((a, b) => {
+            if (a.x === b.x) return a.y - b.y;
+            return a.x - b.x;
+        });
+    }
+
+    function _orderedTilesWithDirection(direction) {
+        if (direction.x === -1.0) {
+            let section1 = [];
+            let section2 = [];
+            let section3 = [];
+            let section4 = [];
+
+            for (let index in tiles) {
+                let tile = tiles[index];
+                if (tile.getY() === 1) {
+                    section1.push(tile.getPosition());
+                } else if (tile.getY() === 2) {
+                    section2.push(tile.getPosition());
+                } else if (tile.getY() === 3) {
+                    section3.push(tile.getPosition());
+                } else if (tile.getY() === 4) {
+                    section4.push(tile.getPosition());
+                }
+            }
+            return [...section1, ...section2, ...section3, ...section4];
+        } else if (direction.x === 1.0) {
+            let section1 = [];
+            let section2 = [];
+            let section3 = [];
+            let section4 = [];
+
+            for (let index in tiles) {
+                let tile = tiles[index];
+                if (tile.getY() === 1) {
+                    section1.push(tile.getPosition());
+                } else if (tile.getY() === 2) {
+                    section2.push(tile.getPosition());
+                } else if (tile.getY() === 3) {
+                    section3.push(tile.getPosition());
+                } else if (tile.getY() === 4) {
+                    section4.push(tile.getPosition());
+                }
+            }
+            section1.reverse();
+            section2.reverse();
+            section3.reverse();
+            section4.reverse();
+            return [...section1, ...section2, ...section3, ...section4];
+        } else if (direction.y === 1.0) {
+            let section1 = [];
+            let section2 = [];
+            let section3 = [];
+            let section4 = [];
+
+            for (let index in tiles) {
+                let tile = tiles[index];
+                if (tile.getX() === 1) {
+                    section1.push(tile.getPosition());
+                } else if (tile.getX() === 2) {
+                    section2.push(tile.getPosition());
+                } else if (tile.getX() === 3) {
+                    section3.push(tile.getPosition());
+                } else if (tile.getX() === 4) {
+                    section4.push(tile.getPosition());
+                }
+            }
+            section1.reverse();
+            section2.reverse();
+            section3.reverse();
+            section4.reverse();
+            return [...section1, ...section2, ...section3, ...section4];
+        } else if (direction.y === -1.0) {
+            let section1 = [];
+            let section2 = [];
+            let section3 = [];
+            let section4 = [];
+
+            for (let index in tiles) {
+                let tile = tiles[index];
+                if (tile.getX() === 1) {
+                    section1.push(tile.getPosition());
+                } else if (tile.getX() === 2) {
+                    section2.push(tile.getPosition());
+                } else if (tile.getX() === 3) {
+                    section3.push(tile.getPosition());
+                } else if (tile.getX() === 4) {
+                    section4.push(tile.getPosition());
+                }
+            }
+
+            return [...section1, ...section2, ...section3, ...section4];
+        }
+    }
+
+    function _isAllowedToMoveAt(position) {
+        for (let i = 0; i < tiles.length; i++) {
+            let tile = tiles[i];
+            if (tile.getX() === position.x && tile.getY() === position.y) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Resets the available tiles from game
+     * @private
+     */
+    function _resetAvailableTiles() {
+        availableTiles = [];
+        for (let i = 1; i <= gameSize; i++) {
+            for (let j = 1; j <= gameSize; j++) {
+                let position = { x: i, y: j };
+                let emptyTile = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(null, position);
+                availableTiles.push(emptyTile);
+            }
+        }
+    }
+
+    function _reCalculateAvailableTiles() {
+        availableTiles = [];
+        for (let i = 1; i <= gameSize * gameSize; i++) {
+            if (_isTileAvailableAtIndex(i)) {
+                let position = _indexToPosition(i);
+                availableTiles.push(Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(null, position));
+            }
+        }
+    }
+
+    function _indexToPosition(i) {
+        let x = i / 4 % 1 / 0.25 + 1;
+        let y = Math.ceil(i / 4);
+        return {
+            x,
+            y
+        };
+    }
+
+    function _tileAtPosition(position) {
+        for (let index in tiles) {
+            if (tiles[index].getX() === position.x && tiles[index].getY() === position.y) {
+                return tiles[index];
+            }
+        }
+        return null;
+    }
+
+    function _isTileAvailableAtIndex(i) {
+        let position = _indexToPosition(i);
+        for (let index in tiles) {
+            if (tiles[index].getX() === position.x && tiles[index].getY() === position.y) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function _removeAvailableTile(tile) {
+        for (let index in availableTiles) {
+            if (availableTiles[index].getPosition() === tile.getPosition()) {
+                availableTiles.splice(index, 1);
+                break;
+            }
+        }
+    }
+
+    function _addAvailableTile(tile) {
+        let emptyTile = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(null, tile.getPosition());
+        availableTiles.push(emptyTile);
+    }
+
+    /**
+     * Returns an available tile and removes it from the available tiles array
+     * @returns {*}
+     * @private
+     */
+    function _getRandomAvailableTile() {
+        if (!availableTiles.length) {
+            return null; // quick exit
+        }
+        let randomPosition = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__["a" /* default */])(0, availableTiles.length - 1);
+        return availableTiles.splice(randomPosition, 1)[0];
+    }
+
+    /**
+     * Initializes new game tiles
+     * @private
+     */
+    function _placeStarterTiles() {
+        let position1 = _getRandomAvailableTile().getPosition();
+        let tile1 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(4, { x: position1.x, y: position1.y });
+
+        let position2 = _getRandomAvailableTile().getPosition();
+        let tile2 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(2, { x: position2.x, y: position2.y });
+
+        tiles.push(tile1);
+        tiles.push(tile2);
+
+        props.currentScore = 4;
+    }
+
+    /**
+     * Recreates a new game
+     * @private
+     */
+    function _initGame() {
+        _resetAvailableTiles();
+        _placeStarterTiles();
+    }
+
+    function _getTileIndex(tile) {
+        return tile.getY * gameSize + tile.getX();
+    }
+
+    function _placeNewRandomTile() {
+        _reCalculateAvailableTiles();
+
+        let newAvailableTile = _getRandomAvailableTile();
+        if (newAvailableTile) {
+            let newTile = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(2, newAvailableTile.getPosition());
+            tiles.push(newTile);
+        }
+    }
+
+    function _placeNewTile(tile) {
+        tiles.push(tile);
+    }
+
+    function _deleteTile(tile) {
+        for (let index in tiles) {
+            if (tiles[index].getX() === tile.getX() && tiles[index].getY() === tile.getY()) {
+                tiles.splice(index, 1);
+                break;
+            }
+        }
+    }
+};
+
+/***/ }),
+/* 88 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by dannyyassine
+ */
+
+const Tile = function (point, initialPosition, didMerged) {
+
+    let position = initialPosition;
+    let value = point || 2;
+    let merged = didMerged || false;
+    let x = 1;
+    let y = 1;
+
+    return {
+        x: position.x,
+        y: position.y,
+        isMerged: merged,
+        setMerged: setMerged,
+        getValue: getValue,
+        setValue: setValue,
+        getPosition: getPosition,
+        getX: getX,
+        getY: getY,
+        setX: setX,
+        setY: setY,
+        setPosition: setPosition
+    };
+
+    function getValue() {
+        return value;
+    }
+
+    function setValue(val) {
+        value = val;
+    }
+
+    function getPosition() {
+        return position;
+    }
+
+    function getX() {
+        return position.x;
+    }
+
+    function getY() {
+        return position.y;
+    }
+
+    function setPosition(newPosition) {
+        position = newPosition;
+        x = position.x;
+        y = position.y;
+        // position.x = newPosition.x;
+        // position.y = newPosition.y;
+    }
+
+    function setMerged(didMerge) {
+        merged = didMerge;
+    }
+
+    function setX(newX) {
+        console.log(newX);
+        if (newX < 1 || newX > 4) {
+            return;
+        }
+        position.x = newX;
+    }
+
+    function setY(newY) {
+        if (newY < 1 || newY > 4) {
+            return;
+        }
+        position.y = newY;
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Tile);
+
+/***/ }),
+/* 89 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by dannyyassine
+ */
+
+const randomNumberHelper = function (leftBound, rightBound) {
+
+  return Math.floor(Math.random() * (rightBound - leftBound) + leftBound);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (randomNumberHelper);
+
+/***/ }),
+/* 90 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /**
  * Created by dannyyassine
@@ -62353,7 +62864,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.components', []);
 
 /***/ }),
-/* 87 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -62362,75 +62873,7 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.compone
 
 __webpack_require__(92);
 
-__webpack_require__(88);
-
-/***/ }),
-/* 88 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__app_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__app_controller__);
-/**
- * Created by dannyyassine
- */
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_2__app_controller___default.a.$inject = ['$scope', 'gameService'];
-
-__WEBPACK_IMPORTED_MODULE_1__app_component___default.a.controller = __WEBPACK_IMPORTED_MODULE_2__app_controller___default.a;
-
-__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('app', __WEBPACK_IMPORTED_MODULE_1__app_component___default.a);
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Created by dannyyassine
- */
-
-module.exports = {
-  template: __webpack_require__(90),
-  controllerAs: 'vm'
-};
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports) {
-
-module.exports = "<div>\n    <div class=\"main-content-layout\">\n        <h1 class=\"title-color\">2048</h1>\n        <grid></grid>\n    </div>\n</div>";
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports) {
-
-/**
- * Created by dannyyassine
- */
-
-function AppController($scope, gameService) {
-    let vm = this;
-    vm.isLoading = false;
-
-    vm.$onInit = $onInit;
-    vm.$postLink = $postLink;
-
-    function $onInit() {}
-
-    function $postLink() {
-        gameService.startGame();
-    }
-}
-
-module.exports = AppController;
+__webpack_require__(96);
 
 /***/ }),
 /* 92 */
@@ -62438,7 +62881,7 @@ module.exports = AppController;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__grid_component__);
@@ -62526,253 +62969,73 @@ const GridController = function ($scope, $document, gameService) {
 /* harmony default export */ __webpack_exports__["a"] = (GridController);
 
 /***/ }),
-/* 96 */,
-/* 97 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_service__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__app_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__app_controller__);
 /**
  * Created by dannyyassine
  */
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.services').service('gameService', __WEBPACK_IMPORTED_MODULE_1__game_service__["a" /* default */]);
+
+__WEBPACK_IMPORTED_MODULE_2__app_controller___default.a.$inject = ['$scope', 'gameService'];
+
+__WEBPACK_IMPORTED_MODULE_1__app_component___default.a.controller = __WEBPACK_IMPORTED_MODULE_2__app_controller___default.a;
+
+__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('app', __WEBPACK_IMPORTED_MODULE_1__app_component___default.a);
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Created by dannyyassine
+ */
+
+module.exports = {
+  template: __webpack_require__(98),
+  controllerAs: 'vm'
+};
 
 /***/ }),
 /* 98 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = GameService;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model_Tile__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__ = __webpack_require__(100);
-/**
- * Created by dannyyassine
- */
-
-
-
-
-function GameService() {
-    /**
-     * Placed tiles on screen
-     * @type {Array}
-     */
-    let tiles = [];
-
-    /**
-     * Player score
-     * @type {number}
-     */
-    let currentScore = 0;
-
-    /**
-     * Game grid size
-     * @type {number}
-     */
-    let gameSize = 4;
-
-    /**
-     * Available tiles spaces to put new tiles on screen
-     * @type {Array}
-     */
-    let availableTiles = [];
-
-    /**
-     * Module
-     */
-    let props = {
-        tiles,
-        score: currentScore
-    };
-
-    return {
-        props: props,
-        startGame: startNewGame,
-        moveUp: moveUp,
-        moveDown: moveDown,
-        moveLeft: moveLeft,
-        moveRight: moveRight
-    };
-
-    /**
-     * Methods
-     */
-
-    function startNewGame() {
-        _initGame();
-    }
-
-    function moveUp() {
-
-        _placeNewRandomTile();
-    }
-
-    function moveDown() {
-
-        _placeNewRandomTile();
-    }
-
-    function moveLeft() {
-
-        _placeNewRandomTile();
-    }
-
-    function moveRight() {
-
-        _placeNewRandomTile();
-    }
-
-    /**
-     * Resets the availbale tiles from game
-     * @private
-     */
-    function _resetAvailableTiles() {
-        availableTiles = [];
-        for (let i = 1; i <= gameSize; i++) {
-            for (let j = 1; j <= gameSize; j++) {
-                let position = { x: i, y: j };
-                let emptyTile = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(null, position);
-                availableTiles.push(emptyTile);
-            }
-        }
-    }
-
-    function _removeAvailableTile(tile) {
-        for (let index in availableTiles) {
-            if (availableTiles[index].getPosition() === tile.getPosition()) {
-                availableTiles.splice(index, 1);
-            }
-        }
-    }
-
-    function _addAvailableTile(tile) {
-        let emptyTile = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(null, tile.getPosition());
-        availableTiles.push(emptyTile);
-    }
-
-    /**
-     * Returns an available tile and removes it from the available tiles array
-     * @returns {*}
-     * @private
-     */
-    function _getRandomAvailableTile() {
-        if (!availableTiles.length) {
-            return null; // quick exit
-        }
-        let randomPosition = Object(__WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__["a" /* default */])(0, availableTiles.length - 1);
-        return availableTiles.splice(randomPosition, 1)[0];
-    }
-
-    /**
-     * Initializes new game tiles
-     * @private
-     */
-    function _placeStarterTiles() {
-        let position1 = _getRandomAvailableTile().getPosition();
-        let tile1 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(2, position1);
-
-        let position2 = _getRandomAvailableTile().getPosition();
-        let tile2 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(4, position2);
-
-        tiles.push(tile1);
-        tiles.push(tile2);
-    }
-
-    /**
-     * Recreates a new game
-     * @private
-     */
-    function _initGame() {
-        _resetAvailableTiles();
-        _placeStarterTiles();
-    }
-
-    function _getTileIndex(tile) {
-        return tile.getY * gameSize + tile.getX();
-    }
-
-    function _placeNewRandomTile() {
-        let newAvailableTile = _getRandomAvailableTile();
-        if (newAvailableTile) {
-            let newTile = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(2, newAvailableTile.getPosition());
-            tiles.push(newTile);
-        }
-        console.log(availableTiles);
-    }
-
-    function _placeNewTile(tile) {
-        tiles.push(tile);
-        _removeAvailableTile(tile);
-    }
-
-    function _deleteTile(tile) {
-        let index = _getTileIndex(tile);
-        availableTiles.splice(index, 1);
-        _addAvailableTile(tile);
-    }
-};
+module.exports = "<div>\n    <div ng-if=\"vm.props.isGameOver\">\n        GAME OVER\n    </div>\n    <div class=\"main-content-layout\">\n        <h1 class=\"title-color\">2048</h1>\n        <h2>{{vm.props.currentScore}}</h2>\n        <grid></grid>\n    </div>\n</div>";
 
 /***/ }),
 /* 99 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 /**
  * Created by dannyyassine
  */
 
-const Tile = function (point, initialPosition) {
+function AppController($scope, gameService) {
+  let vm = this;
 
-    let position = initialPosition;
-    let value = point || 2;
+  vm.props = gameService.props;
 
-    return {
-        getValue: getValue,
-        getPosition: getPosition,
-        getX: getX,
-        getY: getY
-    };
+  vm.$onInit = $onInit;
+  vm.$postLink = $postLink;
 
-    function getValue() {
-        return value;
-    }
+  function $onInit() {}
 
-    function getPosition() {
-        return position;
-    }
+  function $postLink() {
+    gameService.startGame();
+  }
+}
 
-    function getX() {
-        return position.x;
-    }
-
-    function getY() {
-        return position.y;
-    }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (Tile);
-
-/***/ }),
-/* 100 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * Created by dannyyassine
- */
-
-const randomNumberHelper = function (leftBound, rightBound) {
-
-  return Math.floor(Math.random() * (rightBound - leftBound) + leftBound);
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (randomNumberHelper);
+module.exports = AppController;
 
 /***/ })
 /******/ ]);

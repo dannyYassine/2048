@@ -386,6 +386,7 @@ input[type=text] {
   height: 70px;
   border-radius: 5px;
   z-index: 7;
+  transition: transform 0.1s ease;
 }
 .game-tiles .tile.tile-position-4-4 {
   -webkit-transform: translate(250px, 250px);

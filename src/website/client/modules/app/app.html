@@ -1,6 +1,10 @@
 <div>
+    <div ng-if="vm.props.isGameOver">
+        GAME OVER
+    </div>
     <div class="main-content-layout">
         <h1 class="title-color">2048</h1>
+        <h2>{{vm.props.currentScore}}</h2>
         <grid></grid>
     </div>
 </div>

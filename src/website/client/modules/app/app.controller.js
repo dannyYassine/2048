@@ -4,12 +4,14 @@
 
 function AppController ($scope, gameService) {
     let vm = this;
-    vm.isLoading = false;
+
+   vm.props = gameService.props;
 
     vm.$onInit = $onInit;
     vm.$postLink = $postLink;
 
     function $onInit() {
+
     }
 
     function $postLink() {
