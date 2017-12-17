@@ -7,11 +7,17 @@
     <link rel="stylesheet" href="{{__dirname}}/css/fontawesome-all.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
+    <script type="text/javascript" src="{{__dirname}}/js/fastClick.js"></script>
+    <script>
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                FastClick.attach(document.body);
+            }, false);
+        }
+    </script>
 </head>
 <body>
-
 <app></app>
-
 <script src="{{__dirname}}/js/bundle.js" type="text/javascript"></script>
 </body>
 </html>
