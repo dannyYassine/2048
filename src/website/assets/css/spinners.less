@@ -1,0 +1,40 @@
+.spinner{
+  width: 10px;
+  height: 10px;
+  background:#823c00;
+  border-radius:50%;
+  margin: 100px auto;
+  animation:ripple 1s ease infinite;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow:0 0 0 1px #ff3300;
+  }
+  50% {
+    border-top-color:#ff3300;
+  }
+  100% {
+    box-shadow:0 0 0 100px transparent;
+  }
+}
+
+@keyframes sm-spinner {
+  to {transform: rotate(360deg);}
+}
+
+.sm-spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: sm-spinner .6s linear infinite;
+}

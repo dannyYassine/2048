@@ -1,0 +1,61 @@
+@import "colors";
+
+.grid-container {
+  position: relative;
+}
+
+.game-grid {
+  background-color: @tfe-light-brown;
+  width: 320px;
+  height: 320px;
+  border-radius: 15px;
+  padding: 5px;
+  position: absolute;
+  z-index: 5;
+}
+
+.game-tiles {
+  position: absolute;
+  z-index: 6;
+  width: 330px;
+  height: 330px;
+
+  .tile {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    z-index: 7;
+    transition: transform 0.1s ease;
+    .generate-x(4);
+
+    h3 {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      border-radius: 5px;
+      font-size: 20px;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+
+.generate-x(@x, @i: 1) when (@i =< (@x)) {
+  .generate-x(@x, @i + 1);
+  .generate-y(@x, @i);
+
+  .generate-y(@y, @j: 1) when (@j =< (@y)) {
+    .generate-y(@y, @j + 1);
+
+    @xPosition: (@i - 1) * (65 + 5) + (@i) * 10;
+    @yPosition: (@j - 1) * (65 + 5) + (@j) * 10;
+
+    &.tile-position-@{i}-@{j} {
+      -webkit-transform: translate(@xPosition*1px, @yPosition*1px);
+      transform: translate(@xPosition*1px, @yPosition*1px);
+    }
+  }
+}

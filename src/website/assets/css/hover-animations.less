@@ -1,0 +1,86 @@
+
+@fadeDuration: 0.25s;
+@hoverDuration: 0.25s;
+
+@keyframes hover-position-anim {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2px);
+  }
+}
+@keyframes hover-reverse-position-anim {
+  from {
+    transform: translateY(-2px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.hover-position {
+  animation-fill-mode: both;
+  animation-duration: 0.3s;
+  animation-name: hover-reverse-position-anim;
+}
+.hover-position:hover {
+  animation-fill-mode: both;
+  animation-duration: @fadeDuration;
+  animation-timing-function: ease-in;
+  animation-name: hover-position-anim;
+}
+
+@keyframes hover-position-shadow-anim {
+  from {
+    box-shadow: 0px 0px 0px transparent;
+    transform: translateY(0px) scale3d(1, 1, 1) ;
+  }
+  to {
+    box-shadow: 0px 3px 10px lightGrey;
+    transform: translateY(-4px) scale3d(1.025, 1.025, 1) ;
+  }
+}
+@keyframes hover-reverse-position-shadow-anim {
+  from {
+    box-shadow: 0px 3px 10px lightGrey;
+    transform: translateY(-4px) scale3d(1.025, 1.025, 1) ;
+  }
+  to {
+    box-shadow: 0px 0px 0px transparent;
+    transform: translateY(0px) scale3d(1, 1, 1) ;
+  }
+}
+
+.hover-position-shadow {
+  box-shadow: 0px 0px 0px transparent;
+  transform: translateY(0px) scale3d(1, 1, 1);
+  transition: box-shadow @hoverDuration ease-in-out, transform @hoverDuration ease-in-out;
+}
+.hover-position-shadow:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  transform: translateY(-3px) scale3d(1.01, 1.01, 1);
+}
+
+.hover-shadow {
+  box-shadow: 0px 0px 0px transparent;
+  transition: box-shadow @hoverDuration ease-in-out;
+}
+.hover-shadow:hover {
+  box-shadow: 0px 3px 10px lightGrey
+}
+
+.highlight {
+  opacity: 0.70;
+  transition: opacity 0.66s ease;
+}
+
+.highlight:active {
+  opacity: 1.0;
+  color: #552500;
+}
+
+.highlight:hover {
+  opacity: 1.0;
+}
+
