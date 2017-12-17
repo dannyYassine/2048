@@ -63055,7 +63055,7 @@ module.exports = {
 /* 101 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <div ng-if=\"vm.props.isGameOver\">\n        GAME OVER\n    </div>\n    <div class=\"main-content-layout\">\n        <h1 class=\"title-color\">2048</h1>\n        <h2>{{vm.props.currentScore}}</h2>\n        <grid></grid>\n    </div>\n</div>";
+module.exports = "<div>\n    <div ng-if=\"vm.props.isGameOver\">\n        GAME OVER\n    </div>\n    <div class=\"main-content-layout home\">\n        <h1 class=\"title-color\">2048</h1>\n        <h2>{{vm.props.currentScore}}</h2>\n        <grid></grid>\n    </div>\n</div>";
 
 /***/ }),
 /* 102 */
