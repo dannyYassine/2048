@@ -84,7 +84,7 @@ export default function GameService($window) {
     }
 
     function _handleMove(direction) {
-        let didTilesMoved = true;
+        let didTilesMoved = false;
 
         _setupBeforeMove();
         let ordered = _orderedTilesWithDirection(direction);
@@ -123,15 +123,6 @@ export default function GameService($window) {
 
                 _deleteTile(tile);
 
-                // let newPosition = tile.getPosition();
-                // let newTile = Tile(updatedValue, {x: newPosition.x, y: newPosition.y}, true);
-
-                // tiles.push(newTile);
-
-                // newTile.setPosition(newPosition);
-                // newTile.x = newPosition.x;
-                // newTile.y = newPosition.y;
-
                 props.currentScore += nextTile.getValue();
 
                 if (props.currentScore >= scoreToWin) {
@@ -143,6 +134,12 @@ export default function GameService($window) {
             } else {
                 // Move tile
                 //TODO: positon internal not updating
+                let tilePosition = tile.getPosition();
+
+                if (tilePosition.x !== newPosition.x || tilePosition.y !== newPosition.y) {
+                    didTilesMoved = true;
+                }
+
                 tile.setPosition(newPosition);
                 tile.x = newPosition.x;
                 tile.y = newPosition.y;

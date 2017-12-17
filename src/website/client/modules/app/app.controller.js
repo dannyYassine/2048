@@ -40,7 +40,6 @@ function AppController($scope, gameService) {
     }
 
     function onNewGameClicked() {
-
         swal({
             title: 'New game?',
             text: "You will lose your current score and progress",

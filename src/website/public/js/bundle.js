@@ -62699,7 +62699,7 @@ function GameService($window) {
     }
 
     function _handleMove(direction) {
-        let didTilesMoved = true;
+        let didTilesMoved = false;
 
         _setupBeforeMove();
         let ordered = _orderedTilesWithDirection(direction);
@@ -62738,15 +62738,6 @@ function GameService($window) {
 
                 _deleteTile(tile);
 
-                // let newPosition = tile.getPosition();
-                // let newTile = Tile(updatedValue, {x: newPosition.x, y: newPosition.y}, true);
-
-                // tiles.push(newTile);
-
-                // newTile.setPosition(newPosition);
-                // newTile.x = newPosition.x;
-                // newTile.y = newPosition.y;
-
                 props.currentScore += nextTile.getValue();
 
                 if (props.currentScore >= scoreToWin) {
@@ -62757,6 +62748,12 @@ function GameService($window) {
             } else {
                 // Move tile
                 //TODO: positon internal not updating
+                let tilePosition = tile.getPosition();
+
+                if (tilePosition.x !== newPosition.x || tilePosition.y !== newPosition.y) {
+                    didTilesMoved = true;
+                }
+
                 tile.setPosition(newPosition);
                 tile.x = newPosition.x;
                 tile.y = newPosition.y;
@@ -63500,7 +63497,6 @@ function AppController($scope, gameService) {
     }
 
     function onNewGameClicked() {
-
         __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
             title: 'New game?',
             text: "You will lose your current score and progress",
