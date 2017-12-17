@@ -1,9 +1,12 @@
 /**
  * Created by dannyyassine
  */
+import uuidHelper from './uuid';
 
-const Tile = function (point, initialPosition, didMerged) {
+export default Tile;
+function Tile(point, initialPosition, didMerged) {
 
+    let id = uuidHelper.generate();
     let position = initialPosition;
     let value = point || 2;
     let merged = didMerged || false;
@@ -11,10 +14,10 @@ const Tile = function (point, initialPosition, didMerged) {
     let y = 1;
 
     return {
+        id,
         x: position.x,
         y: position.y,
-        isMerged: merged,
-        setMerged: setMerged,
+        merged,
         getValue:   getValue,
         setValue: setValue,
         getPosition: getPosition,
@@ -53,10 +56,6 @@ const Tile = function (point, initialPosition, didMerged) {
         // position.y = newPosition.y;
     }
 
-    function setMerged(didMerge) {
-        merged = didMerge;
-    }
-
     function setX(newX) {
         console.log(newX);
         if (newX < 1 || newX > 4) { return; }
@@ -69,5 +68,3 @@ const Tile = function (point, initialPosition, didMerged) {
     }
 
 };
-
-export default Tile;

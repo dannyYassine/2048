@@ -32,7 +32,6 @@ const GridController = function ($scope, $document, gameService) {
     }
 
     function $onChanges(changes) {
-        console.log(changes);
     }
     
     function _initKeyboardTouchEvents() {

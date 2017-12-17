@@ -91,6 +91,7 @@ export default function GameService($window) {
 
         for (let tileIndex in ordered) {
             let tile = _tileAtPosition(ordered[tileIndex]);
+
             let newPosition = ordered[tileIndex];
 
             let isAllowed = true;
@@ -114,12 +115,11 @@ export default function GameService($window) {
             let tempPosition = {x:newPosition.x + direction.x, y: newPosition.y + direction.y};
             nextTile = _tileAtPosition(tempPosition);
 
-            if (nextTile && nextTile.getValue() === tile.getValue() && !nextTile.isMerged) {
+            if (nextTile && nextTile.getValue() === tile.getValue() && !nextTile.merged && !tile.merged) {
+                console.log(nextTile.merged);
                 didTilesMoved = true;
                 nextTile.setValue(tile.getValue() * 2);
-                nextTile.setMerged(true);
                 nextTile.merged = true;
-                nextTile.isMerged = true;
 
                 _deleteTile(tile);
 
@@ -160,16 +160,14 @@ export default function GameService($window) {
     }
 
     function _setupBeforeMove() {
-        tiles.sort((a, b) => {
+        props.tiles.sort((a, b) => {
             if (a.x === b.x) return a.y - b.y;
             return a.x - b.x;
         });
 
-        tiles.forEach((tile) => {
+        props.tiles.forEach((tile) => {
             //TODO:
-            tile.setMerged(false);
             tile.merged = false;
-            tile.isMerged = false;
         });
     }
 
@@ -204,8 +202,8 @@ export default function GameService($window) {
             let section3 = [];
             let section4 = [];
 
-            for (let index in tiles) {
-                let tile = tiles[index];
+            for (let index in props.tiles) {
+                let tile = props.tiles[index];
                 if (tile.getY() === 1) {
                     section1.push(tile.getPosition())
                 } else if (tile.getY() === 2) {
@@ -223,8 +221,8 @@ export default function GameService($window) {
             let section3 = [];
             let section4 = [];
 
-            for (let index in tiles) {
-                let tile = tiles[index];
+            for (let index in props.tiles) {
+                let tile = props.tiles[index];
                 if (tile.getY() === 1) {
                     section1.push(tile.getPosition())
                 } else if (tile.getY() === 2) {
@@ -246,8 +244,8 @@ export default function GameService($window) {
             let section3 = [];
             let section4 = [];
 
-            for (let index in tiles) {
-                let tile = tiles[index];
+            for (let index in props.tiles) {
+                let tile = props.tiles[index];
                 if (tile.getX() === 1) {
                     section1.push(tile.getPosition())
                 } else if (tile.getX() === 2) {
@@ -269,8 +267,8 @@ export default function GameService($window) {
             let section3 = [];
             let section4 = [];
 
-            for (let index in tiles) {
-                let tile = tiles[index];
+            for (let index in props.tiles) {
+                let tile = props.tiles[index];
                 if (tile.getX() === 1) {
                     section1.push(tile.getPosition())
                 } else if (tile.getX() === 2) {
@@ -287,8 +285,8 @@ export default function GameService($window) {
     }
 
     function _isAllowedToMoveAt(position) {
-        for (let i = 0; i < tiles.length; i++) {
-            let tile = tiles[i];
+        for (let i = 0; i < props.tiles.length; i++) {
+            let tile = props.tiles[i];
             if (tile.getX() === position.x && tile.getY() === position.y) {
                 return false;
             }
@@ -331,9 +329,9 @@ export default function GameService($window) {
     }
 
     function _tileAtPosition(position) {
-        for (let index in tiles) {
-            if (tiles[index].getX() === position.x && tiles[index].getY() === position.y) {
-                return tiles[index];
+        for (let index in props.tiles) {
+            if (props.tiles[index].getX() === position.x && props.tiles[index].getY() === position.y) {
+                return props.tiles[index];
             }
         }
         return null;
@@ -341,8 +339,8 @@ export default function GameService($window) {
 
     function _isTileAvailableAtIndex(i) {
         let position = _indexToPosition(i);
-        for (let index in tiles) {
-            if (tiles[index].getX() === position.x && tiles[index].getY() === position.y) {
+        for (let index in props.tiles) {
+            if (props.tiles[index].getX() === position.x && props.tiles[index].getY() === position.y) {
                 return false;
             }
         }
@@ -351,9 +349,9 @@ export default function GameService($window) {
 
     function _tileAtIndex(i) {
         let position = _indexToPosition(i);
-        for (let index in tiles) {
-            if (tiles[index].getX() === position.x && tiles[index].getY() === position.y) {
-                return tiles[index];
+        for (let index in props.tiles) {
+            if (props.tiles[index].getX() === position.x && props.tiles[index].getY() === position.y) {
+                return props.tiles[index];
             }
         }
         return null;
@@ -397,8 +395,8 @@ export default function GameService($window) {
         let position2 = _getRandomAvailableTile().getPosition();
         let tile2 = Tile(2, {x: position2.x, y: position2.y});
 
-        tiles.push(tile1);
-        tiles.push(tile2);
+        props.tiles.push(tile1);
+        props.tiles.push(tile2);
     }
 
     /**
@@ -409,7 +407,7 @@ export default function GameService($window) {
         props.gameOver = false;
         props.finished = false;
 
-        tiles.splice(0, tiles.length);
+        props.tiles.splice(0, tiles.length);
         props.currentScore = 0;
 
         _resetAvailableTiles();
@@ -427,18 +425,18 @@ export default function GameService($window) {
         let newAvailableTile = _getRandomAvailableTile();
         if (newAvailableTile) {
             let newTile = Tile(2, newAvailableTile.getPosition());
-            tiles.push(newTile);
+            props.tiles.push(newTile);
         }
     }
 
     function _placeNewTile(tile) {
-        tiles.push(tile);
+        props.tiles.push(tile);
     }
 
     function _deleteTile(tile) {
-        for (let index in tiles) {
-            if (tiles[index].getX() === tile.getX() && tiles[index].getY() === tile.getY()) {
-                tiles.splice(index, 1);
+        for (let index in props.tiles) {
+            if (props.tiles[index].getX() === tile.getX() && props.tiles[index].getY() === tile.getY()) {
+                props.tiles.splice(index, 1);
                 break;
             }
         }
