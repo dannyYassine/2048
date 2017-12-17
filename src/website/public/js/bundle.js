@@ -955,6 +955,14 @@ exports.services = services;
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(56);
+module.exports = angular;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 function __export(m) {
@@ -971,14 +979,6 @@ __export(__webpack_require__(21));
 __export(__webpack_require__(6));
 __export(__webpack_require__(7));
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(56);
-module.exports = angular;
-
 
 /***/ }),
 /* 6 */
@@ -1424,7 +1424,7 @@ var TransitionHookScope;
 Object.defineProperty(exports, "__esModule", { value: true });
 var predicates_1 = __webpack_require__(1);
 var strings_1 = __webpack_require__(6);
-var common_1 = __webpack_require__(4);
+var common_1 = __webpack_require__(5);
 /**
  * Encapsulate the target (destination) state/params/options of a [[Transition]].
  *
@@ -2112,7 +2112,7 @@ var coreservices_1 = __webpack_require__(3);
 var trace_1 = __webpack_require__(7);
 var strings_1 = __webpack_require__(6);
 var predicates_1 = __webpack_require__(1);
-var common_2 = __webpack_require__(4);
+var common_2 = __webpack_require__(5);
 // TODO: explicitly make this user configurable
 exports.defaultResolvePolicy = {
     when: "LAZY",
@@ -3157,7 +3157,7 @@ var interface_1 = __webpack_require__(29);
 var resolvable_1 = __webpack_require__(13);
 var pathFactory_1 = __webpack_require__(16);
 var strings_1 = __webpack_require__(6);
-var common_2 = __webpack_require__(4);
+var common_2 = __webpack_require__(5);
 var whens = interface_1.resolvePolicies.when;
 var ALL_WHENS = [whens.EAGER, whens.LAZY];
 var EAGER_WHENS = [whens.EAGER];
@@ -3879,7 +3879,7 @@ exports.UrlMatcher = UrlMatcher;
  * @module vanilla
  */ /** */
 Object.defineProperty(exports, "__esModule", { value: true });
-var common_1 = __webpack_require__(4);
+var common_1 = __webpack_require__(5);
 var utils_1 = __webpack_require__(26);
 /** A base `LocationServices` */
 var BaseLocationServices = /** @class */ (function () {
@@ -4744,7 +4744,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module vanilla
  */
 /** */
-var common_1 = __webpack_require__(4);
+var common_1 = __webpack_require__(5);
 exports.keyValsToObjectR = function (accum, _a) {
     var key = _a[0], val = _a[1];
     if (!accum.hasOwnProperty(key)) {
@@ -6712,7 +6712,7 @@ var urlMatcher_1 = __webpack_require__(18);
 var hof_1 = __webpack_require__(2);
 var urlRule_1 = __webpack_require__(40);
 var targetState_1 = __webpack_require__(9);
-var common_2 = __webpack_require__(4);
+var common_2 = __webpack_require__(5);
 /** @hidden */
 function appendBasePath(url, isHtml5, absolute, baseHref) {
     if (baseHref === '/')
@@ -7800,7 +7800,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module vanilla
  */
 /** */
-var index_1 = __webpack_require__(4);
+var index_1 = __webpack_require__(5);
 /**
  * An angular1-like promise api
  *
@@ -7861,7 +7861,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module vanilla
  */
 /** */
-var index_1 = __webpack_require__(4);
+var index_1 = __webpack_require__(5);
 // globally available injectables
 var globals = {};
 var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
@@ -7977,7 +7977,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module vanilla
  */
 /** */
-var common_1 = __webpack_require__(4);
+var common_1 = __webpack_require__(5);
 var baseLocationService_1 = __webpack_require__(19);
 /** A `LocationServices` that uses the browser hash "#" to get/set the current location */
 var HashLocationService = /** @class */ (function (_super) {
@@ -8060,7 +8060,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var baseLocationService_1 = __webpack_require__(19);
-var common_1 = __webpack_require__(4);
+var common_1 = __webpack_require__(5);
 /**
  * A `LocationServices` that gets/sets the current location using the browser's `location` and `history` apis
  *
@@ -8227,7 +8227,7 @@ __webpack_require__(55);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__);
@@ -42487,7 +42487,7 @@ $provide.value("$locale", {
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(5), __webpack_require__(58)) :
+	 true ? factory(exports, __webpack_require__(4), __webpack_require__(58)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'angular', '@uirouter/core'], factory) :
 	(factory((global['@uirouter/angularjs'] = {}),global.angular,global['@uirouter/core']));
 }(this, (function (exports,ng_from_import,core) { 'use strict';
@@ -44509,7 +44509,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(4));
+__export(__webpack_require__(5));
 __export(__webpack_require__(59));
 __export(__webpack_require__(60));
 __export(__webpack_require__(61));
@@ -45127,7 +45127,7 @@ exports.UIRouterPluginBase = UIRouterPluginBase;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /**
  * Created by dannyyassine
@@ -45146,7 +45146,7 @@ __webpack_require__(80);
 /**
  * Created by dannyyassine
  */
-const angular = __webpack_require__(5);
+const angular = __webpack_require__(4);
 
 const FadeDirective = __webpack_require__(81);
 
@@ -45186,7 +45186,7 @@ module.exports = FadeDirective;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /**
  * Created by dannyyassine
@@ -45202,7 +45202,7 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.filters
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
@@ -62342,7 +62342,7 @@ module.exports = function(module) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_service__ = __webpack_require__(87);
 /**
@@ -62853,7 +62853,7 @@ const randomNumberHelper = function (leftBound, rightBound) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /**
  * Created by dannyyassine
@@ -62871,10 +62871,10 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.compone
  * Created by dannyyassine
  */
 
-__webpack_require__(100);
 __webpack_require__(92);
+__webpack_require__(95);
 
-__webpack_require__(96);
+__webpack_require__(99);
 
 /***/ }),
 /* 92 */
@@ -62882,11 +62882,55 @@ __webpack_require__(96);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__tile_component__);
+/**
+ * Created by dannyyassine
+ */
+
+
+
+__WEBPACK_IMPORTED_MODULE_1__tile_component___default.a.$inject = ['$scope'];
+
+__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('tile', __WEBPACK_IMPORTED_MODULE_1__tile_component___default.a);
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Created by dannyyassine
+ */
+
+const TileComponent = {
+    bindings: {
+        tile: '<'
+    },
+    template: __webpack_require__(94),
+    controllerAs: 'vm'
+};
+
+module.exports = TileComponent;
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"tile tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__grid_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__grid_controller__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__grid_controller__ = __webpack_require__(98);
 /**
  * Created by dannyyassine
  */
@@ -62901,7 +62945,7 @@ __WEBPACK_IMPORTED_MODULE_1__grid_component___default.a.$inject = ['$scope', '$d
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('grid', __WEBPACK_IMPORTED_MODULE_1__grid_component___default.a);
 
 /***/ }),
-/* 93 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -62909,20 +62953,20 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').compo
  */
 
 const GridComponent = {
-  template: __webpack_require__(94),
+  template: __webpack_require__(97),
   controllerAs: 'vm'
 };
 
 module.exports = GridComponent;
 
 /***/ }),
-/* 94 */
+/* 97 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\">\n        <tile ng-repeat=\"tile in vm.tiles\" tile=\"tile\"></tile>\n    </div>\n</div>  .generate-y(@x, @i);\n";
 
 /***/ }),
-/* 95 */
+/* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -62970,16 +63014,16 @@ const GridController = function ($scope, $document, gameService) {
 /* harmony default export */ __webpack_exports__["a"] = (GridController);
 
 /***/ }),
-/* 96 */
+/* 99 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__app_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__app_controller__);
 /**
  * Created by dannyyassine
@@ -62995,7 +63039,7 @@ __WEBPACK_IMPORTED_MODULE_1__app_component___default.a.controller = __WEBPACK_IM
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('app', __WEBPACK_IMPORTED_MODULE_1__app_component___default.a);
 
 /***/ }),
-/* 97 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -63003,18 +63047,18 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').compo
  */
 
 module.exports = {
-  template: __webpack_require__(98),
+  template: __webpack_require__(101),
   controllerAs: 'vm'
 };
 
 /***/ }),
-/* 98 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = "<div>\n    <div ng-if=\"vm.props.isGameOver\">\n        GAME OVER\n    </div>\n    <div class=\"main-content-layout\">\n        <h1 class=\"title-color\">2048</h1>\n        <h2>{{vm.props.currentScore}}</h2>\n        <grid></grid>\n    </div>\n</div>";
 
 /***/ }),
-/* 99 */
+/* 102 */
 /***/ (function(module, exports) {
 
 /**
@@ -63037,50 +63081,6 @@ function AppController($scope, gameService) {
 }
 
 module.exports = AppController;
-
-/***/ }),
-/* 100 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__tile_component__);
-/**
- * Created by dannyyassine
- */
-
-
-
-__WEBPACK_IMPORTED_MODULE_1__tile_component___default.a.$inject = ['$scope'];
-
-__WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('tile', __WEBPACK_IMPORTED_MODULE_1__tile_component___default.a);
-
-/***/ }),
-/* 101 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Created by dannyyassine
- */
-
-const TileComponent = {
-    bindings: {
-        tile: '<'
-    },
-    template: __webpack_require__(102),
-    controllerAs: 'vm'
-};
-
-module.exports = TileComponent;
-
-/***/ }),
-/* 102 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"tile tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
 
 /***/ })
 /******/ ]);

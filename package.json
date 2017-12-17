@@ -37,5 +37,8 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "webpack": "^3"
+  },
+  "engines": {
+    "node": "6.11.5"
   }
 }
