@@ -8,13 +8,19 @@ export default AppController;
 function AppController($scope, gameService) {
     let vm = this;
 
-   vm.props = gameService.props;
+    vm.props = gameService.props;
+    vm.keyboardEnabled = true;
 
     vm.$onInit = $onInit;
     vm.$postLink = $postLink;
 
     vm.onNewGameClicked = onNewGameClicked;
+    vm.onGameOver = onGameOver;
+    vm.playerWon = playerWon;
 
+    /**
+     * Life cyles
+     */
     function $onInit() {
 
     }
@@ -23,18 +29,59 @@ function AppController($scope, gameService) {
         gameService.startGame();
     }
 
+    /**
+     * Instance Methods
+     */
+
+    function resetGame() {
+        vm.keyboardEnabled = true;
+        gameService.startGame();
+        $scope.$apply();
+    }
+
     function onNewGameClicked() {
+
         swal({
             title: 'New game?',
             text: "You will lose your current score and progress",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonColor: '#42B5A6',
+            cancelButtonColor: '#F3426E',
+            confirmButtonText: 'New game'
         }).then((result) => {
             if (result.value) {
-                gameService.startGame();
+                resetGame();
+            }
+        })
+    }
+
+    function onGameOver() {
+        vm.keyboardEnabled = false;
+        swal({
+            title: 'Game over!',
+            text: `Your current score is ${vm.props.currentScore}`,
+            type: 'error',
+            confirmButtonColor: '#42B5A6',
+            confirmButtonText: 'New game?'
+        }).then((result) => {
+            if (result.value) {
+                resetGame();
+            }
+        })
+    }
+
+    function playerWon() {
+        vm.keyboardEnabled = false;
+        swal({
+            title: 'Congratulations! You win!',
+            text: `Your current score is ${vm.props.currentScore}`,
+            type: 'success',
+            confirmButtonColor: '#42B5A6',
+            confirmButtonText: 'New game?'
+        }).then((result) => {
+            if (result.value) {
+                resetGame();
             }
         })
     }

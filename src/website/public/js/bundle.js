@@ -8231,9 +8231,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_swipe__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular_swipe___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular_swipe__);
 /**
  * Created by dannyyassine
  */
+
 
 
 
@@ -8246,7 +8249,7 @@ __webpack_require__(90);
 /**
  * Set Angular client
  */
-let app = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight', [__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default.a, 'twentyFortyEight.services', 'twentyFortyEight.components', 'twentyFortyEight.filters', 'twentyFortyEight.directives']);
+let app = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight', [__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default.a, 'swipe', 'twentyFortyEight.services', 'twentyFortyEight.components', 'twentyFortyEight.filters', 'twentyFortyEight.directives']);
 
 __webpack_require__(91);
 
@@ -62412,7 +62415,8 @@ function GameService($window) {
         tiles,
         currentScore,
         highScore,
-        isGameOver: gameOver
+        gameOver,
+        finished
     };
 
     return {
@@ -62499,8 +62503,8 @@ function GameService($window) {
 
                 props.currentScore += nextTile.getValue();
 
-                if (currentScore >= scoreToWin) {
-                    finished = true;
+                if (props.currentScore >= scoreToWin) {
+                    props.finished = true;
                 }
 
                 _verifyHighScore();
@@ -62517,6 +62521,10 @@ function GameService($window) {
         if (didTilesMoved) {
             _placeNewRandomTile();
         }
+
+        if (!_anyMovesAvailable()) {
+            props.gameOver = true;
+        }
     }
 
     function _setupBeforeMove() {
@@ -62531,6 +62539,30 @@ function GameService($window) {
             tile.merged = false;
             tile.isMerged = false;
         });
+    }
+
+    function _anyMovesAvailable() {
+        for (let i = 1; i < gameSize * gameSize; i++) {
+            let tile = _tileAtIndex(i);
+
+            if (tile) {
+
+                let directions = [{ x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 0, y: -1 }];
+
+                for (let directionIndex in directions) {
+                    let direction = directions[directionIndex];
+                    let tilePosition = tile.getPosition();
+                    let position = { x: tilePosition.x + direction.x, y: tilePosition.y + direction.y };
+                    let possibleMatch = _tileAtPosition(position);
+                    if (possibleMatch && possibleMatch.getValue() === tile.getValue()) {
+                        return true;
+                    }
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     function _orderedTilesWithDirection(direction) {
@@ -62685,6 +62717,16 @@ function GameService($window) {
         return true;
     }
 
+    function _tileAtIndex(i) {
+        let position = _indexToPosition(i);
+        for (let index in tiles) {
+            if (tiles[index].getX() === position.x && tiles[index].getY() === position.y) {
+                return tiles[index];
+            }
+        }
+        return null;
+    }
+
     function _removeAvailableTile(tile) {
         for (let index in availableTiles) {
             if (availableTiles[index].getPosition() === tile.getPosition()) {
@@ -62732,6 +62774,12 @@ function GameService($window) {
      * @private
      */
     function _initGame() {
+        props.gameOver = false;
+        props.finished = false;
+
+        tiles.splice(0, tiles.length);
+        props.currentScore = 0;
+
         _resetAvailableTiles();
         _placeStarterTiles();
         _loadHighScore();
@@ -62986,8 +63034,11 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').compo
  */
 
 const GridComponent = {
-  template: __webpack_require__(97),
-  controllerAs: 'vm'
+    bindings: {
+        keysEnabled: '<'
+    },
+    template: __webpack_require__(97),
+    controllerAs: 'vm'
 };
 
 module.exports = GridComponent;
@@ -62996,7 +63047,7 @@ module.exports = GridComponent;
 /* 97 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\">\n        <tile ng-repeat=\"tile in vm.tiles\" tile=\"tile\"></tile>\n    </div>\n</div>\n";
+module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\"\n         ng-swipe-up=\"vm.swipeUp()\"\n         ng-swipe-down=\"vm.swipeDown()\"\n         ng-swipe-left=\"vm.swipeLeft()\"\n         ng-swipe-right=\"vm.swipeRight()\"\n    >\n        <tile ng-repeat=\"tile in vm.tiles\" tile=\"tile\"></tile>\n    </div>\n</div>\n";
 
 /***/ }),
 /* 98 */
@@ -63010,8 +63061,15 @@ module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\
 const GridController = function ($scope, $document, gameService) {
     let vm = this;
 
-    vm.$onInit = $onInit;
     vm.tiles = gameService.props.tiles;
+
+    vm.$onInit = $onInit;
+    vm.$onChanges = $onChanges;
+
+    vm.swipeUp = swipeUp;
+    vm.swipeDown = swipeDown;
+    vm.swipeLeft = swipeLeft;
+    vm.swipeRight = swipeRight;
 
     const keyboardKeys = {
         up: 38,
@@ -63022,6 +63080,10 @@ const GridController = function ($scope, $document, gameService) {
 
     function $onInit() {
         _initKeyboardTouchEvents();
+    }
+
+    function $onChanges(changes) {
+        console.log(changes);
     }
 
     function _initKeyboardTouchEvents() {
@@ -63041,6 +63103,26 @@ const GridController = function ($scope, $document, gameService) {
             }
             $scope.$apply();
         });
+    }
+
+    function swipeUp() {
+        gameService.moveUp();
+        $scope.$apply();
+    }
+
+    function swipeDown() {
+        gameService.moveDown();
+        $scope.$apply();
+    }
+
+    function swipeLeft() {
+        gameService.moveLeft();
+        $scope.$apply();
+    }
+
+    function swipeRight() {
+        gameService.moveRight();
+        $scope.$apply();
     }
 };
 
@@ -63064,9 +63146,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-__WEBPACK_IMPORTED_MODULE_2__app_controller__["a" /* default */].$inject = ['$scope', 'gameService'];
-
 __WEBPACK_IMPORTED_MODULE_1__app_component___default.a.controller = __WEBPACK_IMPORTED_MODULE_2__app_controller__["a" /* default */];
+__WEBPACK_IMPORTED_MODULE_2__app_controller__["a" /* default */].$inject = ['$scope', 'gameService'];
 
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('app', __WEBPACK_IMPORTED_MODULE_1__app_component___default.a);
 
@@ -63087,7 +63168,7 @@ module.exports = {
 /* 101 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <div ng-if=\"vm.props.isGameOver\">\n        GAME OVER\n    </div>\n    <div class=\"main-content-layout home\">\n        <div class=\"home-header\">\n            <div class=\"title-container\">\n                <h1 class=\"title title-color\">2048</h1>\n            </div>\n            <div class=\"score-container\">\n                <div dy-score points=\"vm.props.currentScore\" title=\"SCORE\"></div>\n                <div dy-score points=\"vm.props.highScore\" title=\"BEST\"></div>\n            </div>\n            <div class=\"description\">\n                <div class=\"description-left\">\n                    <p class=\"tfe-bold\">Play 2048 Game Online</p>\n                    <p>Join the numbers and get to the <span class=\"tfe-bold\">2048 tile!</span></p>\n                </div>\n                <div class=\"description-right\">\n                    <button class=\"new-game-btn\">NEW GAME</button>\n                </div>\n            <div class=\"clear-float\"></div>\n            </div>\n            <grid></grid>\n        </div>\n    </div>\n</div>";
+module.exports = "<div>\n    <div ng-if=\"vm.props.gameOver == true\">\n        {{vm.onGameOver()}}\n    </div>\n    <div ng-if=\"vm.props.finished == true\">\n        {{vm.playerWon()}}\n    </div>\n    <div class=\"main-content-layout home\">\n        <div class=\"home-header\">\n            <div class=\"title-container\">\n                <h1 class=\"title title-color\">2048</h1>\n            </div>\n            <div class=\"score-container\">\n                <div dy-score points=\"vm.props.currentScore\" title=\"SCORE\"></div>\n                <div dy-score points=\"vm.props.highScore\" title=\"BEST\"></div>\n            </div>\n            <div class=\"description\">\n                <div class=\"description-left\">\n                    <p class=\"tfe-bold\">Play 2048 Game Online</p>\n                    <p>Join the numbers and get to the <span class=\"tfe-bold\">2048 tile!</span></p>\n                </div>\n                <div class=\"description-right\">\n                    <button class=\"new-game-btn\" ng-click=\"vm.onNewGameClicked()\">NEW GAME</button>\n                </div>\n            <div class=\"clear-float\"></div>\n            </div>\n            <grid keysEnabled=\"vm.keyboardEnabled\"></grid>\n        </div>\n        <div class=\"footer\">\n            <div class=\"danny-yassine-container\">\n                <a href=\"https://www.linkedin.com/in/danny-yassine-1837a240/\" target=\"_blank\">\n                    Danny Yassine\n                </a>\n            </div>\n            <div class=\"github-img-container\">\n                <a href=\"https://github.com/dannyYassine/2048\" target=\"_blank\">\n                    <img class=\"github-img\" src=\"/img/github.png\"/>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>";
 
 /***/ }),
 /* 102 */
@@ -63107,30 +63188,77 @@ function AppController($scope, gameService) {
     let vm = this;
 
     vm.props = gameService.props;
+    vm.keyboardEnabled = true;
 
     vm.$onInit = $onInit;
     vm.$postLink = $postLink;
 
     vm.onNewGameClicked = onNewGameClicked;
+    vm.onGameOver = onGameOver;
+    vm.playerWon = playerWon;
 
+    /**
+     * Life cyles
+     */
     function $onInit() {}
 
     function $postLink() {
         gameService.startGame();
     }
 
+    /**
+     * Instance Methods
+     */
+
+    function resetGame() {
+        vm.keyboardEnabled = true;
+        gameService.startGame();
+        $scope.$apply();
+    }
+
     function onNewGameClicked() {
+
         __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
             title: 'New game?',
             text: "You will lose your current score and progress",
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonColor: '#42B5A6',
+            cancelButtonColor: '#F3426E',
+            confirmButtonText: 'New game'
         }).then(result => {
             if (result.value) {
-                gameService.startGame();
+                resetGame();
+            }
+        });
+    }
+
+    function onGameOver() {
+        vm.keyboardEnabled = false;
+        __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+            title: 'Game over!',
+            text: `Your current score is ${vm.props.currentScore}`,
+            type: 'error',
+            confirmButtonColor: '#42B5A6',
+            confirmButtonText: 'New game?'
+        }).then(result => {
+            if (result.value) {
+                resetGame();
+            }
+        });
+    }
+
+    function playerWon() {
+        vm.keyboardEnabled = false;
+        __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+            title: 'Congratulations! You win!',
+            text: `Your current score is ${vm.props.currentScore}`,
+            type: 'success',
+            confirmButtonColor: '#42B5A6',
+            confirmButtonText: 'New game?'
+        }).then(result => {
+            if (result.value) {
+                resetGame();
             }
         });
     }
@@ -65057,6 +65185,207 @@ return sweetAlert$1;
 })));
 if (typeof window !== 'undefined' && window.Sweetalert2) window.sweetAlert = window.swal = window.Sweetalert2;
 
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _angular = __webpack_require__(4);
+
+exports.default = (0, _angular.module)('swipe', []).factory('swipe', function () {
+  var MOVE_BUFFER_RADIUS = 40;
+  var MAX_RATIO = 0.3;
+
+  var POINTER_EVENTS = {
+    'mouse': {
+      start: 'mousedown',
+      move: 'mousemove',
+      end: 'mouseup'
+    },
+    'touch': {
+      start: 'touchstart',
+      move: 'touchmove',
+      end: 'touchend',
+      cancel: 'touchcancel'
+    }
+  };
+
+  function getCoordinates(event) {
+    var originalEvent = event.originalEvent || event;
+    var touches = originalEvent.touches && originalEvent.touches.length ? originalEvent.touches : [originalEvent];
+    var e = originalEvent.changedTouches && originalEvent.changedTouches[0] || touches[0];
+
+    return {
+      x: e.clientX,
+      y: e.clientY
+    };
+  }
+
+  function getEvents(pointerTypes, eventType) {
+    var res = [];
+    angular.forEach(pointerTypes, function (pointerType) {
+      var eventName = POINTER_EVENTS[pointerType][eventType];
+      if (eventName) {
+        res.push(eventName);
+      }
+    });
+    return res.join(' ');
+  }
+
+  return {
+
+    bind: function bind(element, eventHandlers, pointerTypes) {
+
+      // Absolute total movement
+      var totalX, totalY;
+      // Coordinates of the start position.
+      var startCoords;
+      var lastPos;
+      // Whether a swipe is active.
+      var active = false;
+      // Decide where we are going
+      var isDecided = false;
+      var isVertical = true;
+
+      pointerTypes = pointerTypes || ['mouse', 'touch'];
+
+      element.on(getEvents(pointerTypes, 'start'), function (event) {
+        startCoords = getCoordinates(event);
+        active = true;
+        totalX = 0;
+        totalY = 0;
+        isDecided = false;
+        isVertical = true;
+        lastPos = startCoords;
+        eventHandlers['start'] && eventHandlers['start'](startCoords, event);
+      });
+
+      element.on(getEvents(pointerTypes, 'cancel'), function (event) {
+        active = false;
+        eventHandlers['cancel'] && eventHandlers['cancel'](event);
+      });
+
+      element.on(getEvents(pointerTypes, 'move'), function (event) {
+
+        if (!active) {
+          return;
+        }
+
+        if (!startCoords) {
+          return;
+        }
+
+        var coords = getCoordinates(event);
+
+        totalX += Math.abs(coords.x - lastPos.x);
+        totalY += Math.abs(coords.y - lastPos.y);
+
+        lastPos = coords;
+
+        if (totalX < MOVE_BUFFER_RADIUS && totalY < MOVE_BUFFER_RADIUS) {
+          return;
+        } else {
+          if (!isDecided) {
+
+            var deltaX, deltaY, ratio;
+
+            deltaX = Math.abs(coords.x - startCoords.x);
+            deltaY = Math.abs(coords.y - startCoords.y);
+
+            ratio = deltaY / deltaX;
+
+            if (ratio < MAX_RATIO) {
+              event.preventDefault();
+              isVertical = false;
+            } else {
+              isVertical = true;
+            }
+
+            isDecided = true;
+          }
+        }
+
+        event.isVertical = isVertical;
+        eventHandlers['move'] && eventHandlers['move'](coords, event);
+      });
+
+      element.on(getEvents(pointerTypes, 'end'), function (event) {
+        if (!active) {
+          return;
+        }
+        event.isVertical = isVertical;
+        active = false;
+        eventHandlers['end'] && eventHandlers['end'](getCoordinates(event), event);
+      });
+    }
+  };
+}).directive('ngSwipeLeft', makeSwipeDirective('ngSwipeLeft', -1, false, 'swipeleft')).directive('ngSwipeRight', makeSwipeDirective('ngSwipeRight', 1, false, 'swiperight')).directive('ngSwipeUp', makeSwipeDirective('ngSwipeUp', -1, true, 'swipeup')).directive('ngSwipeDown', makeSwipeDirective('ngSwipeDown', 1, true, 'swipedown'));
+
+function makeSwipeDirective(directiveName, direction, axis, eventName) {
+  return ['$parse', 'swipe', function ($parse, swipe) {
+    var MAX_OTHER_AXIS_DISTANCE = 75,
+        MAX_RATIO = 0.3,
+        MIN_DISTANCE = 30;
+
+    return function (scope, element, attr) {
+      var swipeHandler = $parse(attr[directiveName]);
+      var startCoords = undefined,
+          valid = undefined;
+
+      function validSwipe(coords) {
+        if (!startCoords || !valid) {
+          return false;
+        }
+
+        var deltaY = (coords.y - startCoords.y) * direction;
+        var deltaX = (coords.x - startCoords.x) * direction;
+
+        if (!axis) {
+          // horizontal swipe
+          return Math.abs(deltaY) < MAX_OTHER_AXIS_DISTANCE && deltaX > 0 && deltaX > MIN_DISTANCE && Math.abs(deltaY) / deltaX < MAX_RATIO;
+        } else {
+          // vertical swipe
+          return Math.abs(deltaX) < MAX_OTHER_AXIS_DISTANCE && deltaY > 0 && deltaY > MIN_DISTANCE && Math.abs(deltaX) / deltaY < MAX_RATIO;
+        }
+      }
+
+      var pointerTypes = ['touch'];
+
+      if (!angular.isDefined(attr['ngSwipeDisableMouse'])) {
+        pointerTypes.push('mouse');
+      }
+
+      swipe.bind(element, {
+        'start': function start(coords, event) {
+          var className = event.target.getAttribute('class');
+          if (axis && (!className || className && className.match('noPreventDefault') === null)) {
+            event.preventDefault();
+          }
+          startCoords = coords;
+          valid = true;
+        },
+        'cancel': function cancel() {
+          valid = false;
+        },
+        'end': function end(coords, event) {
+          if (validSwipe(coords)) {
+            scope.$apply(function () {
+              element.triggerHandler(eventName);
+              swipeHandler(scope, { $event: event });
+            });
+          }
+        }
+      }, pointerTypes);
+    };
+  }];
+}
 
 /***/ })
 /******/ ]);

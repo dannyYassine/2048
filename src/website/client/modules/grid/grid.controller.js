@@ -4,9 +4,16 @@
 
 const GridController = function ($scope, $document, gameService) {
     let vm = this;
-    
-    vm.$onInit = $onInit;
+
     vm.tiles = gameService.props.tiles;
+
+    vm.$onInit = $onInit;
+    vm.$onChanges = $onChanges;
+
+    vm.swipeUp = swipeUp;
+    vm.swipeDown = swipeDown;
+    vm.swipeLeft = swipeLeft;
+    vm.swipeRight = swipeRight;
 
     const keyboardKeys = {
         up: 38,
@@ -17,6 +24,10 @@ const GridController = function ($scope, $document, gameService) {
 
     function $onInit() {
         _initKeyboardTouchEvents()
+    }
+
+    function $onChanges(changes) {
+        console.log(changes);
     }
     
     function _initKeyboardTouchEvents() {
@@ -37,6 +48,27 @@ const GridController = function ($scope, $document, gameService) {
             $scope.$apply();
         });
     }
+
+    function swipeUp() {
+        gameService.moveUp();
+        $scope.$apply();
+    }
+
+    function swipeDown() {
+        gameService.moveDown();
+        $scope.$apply();
+    }
+
+    function swipeLeft() {
+        gameService.moveLeft();
+        $scope.$apply();
+    }
+
+    function swipeRight() {
+        gameService.moveRight();
+        $scope.$apply();
+    }
+
 };
 
 export default GridController;

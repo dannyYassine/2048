@@ -3,6 +3,9 @@
  */
 
 const GridComponent = {
+    bindings: {
+        keysEnabled: '<'
+    },
     template: require('./grid.html'),
     controllerAs: 'vm'
 };

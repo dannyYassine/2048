@@ -311,47 +311,47 @@ th {
 }
 .color-2 {
   background-color: #5C707B;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-4 {
   background-color: #42B5A6;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-8 {
   background-color: #9D600F;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-16 {
   background-color: #B92C92;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-32 {
   background-color: #FFD201;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-64 {
   background-color: #00ABD6;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-128 {
   background-color: #018752;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-256 {
   background-color: #FE6D00;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-512 {
   background-color: #C6D601;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-1024 {
   background-color: #00457C;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 .color-2048 {
   background-color: #F3426E;
-  color: #CDC1B4;
+  color: #F9F6F2;
 }
 html,
 body {
@@ -418,6 +418,19 @@ p {
 .title {
   font-size: 50px;
   margin: 10px 0;
+}
+.danny-yassine-container {
+  width: 200px;
+  margin: 10px auto;
+  text-align: center;
+}
+.github-img-container {
+  width: 50px;
+  margin: 0 auto;
+}
+.github-img {
+  width: 50px;
+  height: 50px;
 }
 .grid-row {
   display: inline;
@@ -876,6 +889,7 @@ p {
 .description {
   float: none;
   clear: both;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 .description .description-left {
@@ -888,6 +902,14 @@ p {
 .clear-float {
   float: none;
   clear: both;
+}
+.footer {
+  margin: 400px 0 auto;
+  width: 100%;
+}
+.footer h4 {
+  width: 100%;
+  text-align: center;
 }
 
 /*# sourceMappingURL=main.css.map */

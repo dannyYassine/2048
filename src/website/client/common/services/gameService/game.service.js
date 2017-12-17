@@ -46,7 +46,8 @@ export default function GameService($window) {
         tiles,
         currentScore,
         highScore,
-        isGameOver: gameOver,
+        gameOver,
+        finished
     };
 
     return {
@@ -133,8 +134,8 @@ export default function GameService($window) {
 
                 props.currentScore += nextTile.getValue();
 
-                if (currentScore >= scoreToWin) {
-                    finished = true;
+                if (props.currentScore >= scoreToWin) {
+                    props.finished = true;
                 }
 
                 _verifyHighScore();
@@ -155,6 +156,10 @@ export default function GameService($window) {
             _placeNewRandomTile();
         }
 
+        if (!_anyMovesAvailable()) {
+            props.gameOver = true;
+        }
+
     }
 
     function _setupBeforeMove() {
@@ -169,6 +174,30 @@ export default function GameService($window) {
             tile.merged = false;
             tile.isMerged = false;
         });
+    }
+
+    function _anyMovesAvailable() {
+        for (let i = 1; i < gameSize * gameSize; i++) {
+            let tile = _tileAtIndex(i);
+
+            if (tile) {
+
+                let directions = [{x: 1, y: 0}, {x: -1, y: 0}, {x: 0, y: 1}, {x: 0, y: -1}];
+
+                for (let directionIndex in directions) {
+                    let direction = directions[directionIndex];
+                    let tilePosition = tile.getPosition();
+                    let position = { x: tilePosition.x + direction.x, y: tilePosition.y + direction.y };
+                    let possibleMatch = _tileAtPosition(position);
+                    if (possibleMatch && possibleMatch.getValue() === tile.getValue()) {
+                        return true;
+                    }
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
     
     function _orderedTilesWithDirection(direction) {
@@ -323,6 +352,16 @@ export default function GameService($window) {
         return true;
     }
 
+    function _tileAtIndex(i) {
+        let position = _indexToPosition(i);
+        for (let index in tiles) {
+            if (tiles[index].getX() === position.x && tiles[index].getY() === position.y) {
+                return tiles[index];
+            }
+        }
+        return null;
+    }
+
     function _removeAvailableTile(tile) {
         for (let index in availableTiles) {
             if (availableTiles[index].getPosition() === tile.getPosition()) {
@@ -370,6 +409,12 @@ export default function GameService($window) {
      * @private
      */
     function _initGame() {
+        props.gameOver = false;
+        props.finished = false;
+
+        tiles.splice(0, tiles.length);
+        props.currentScore = 0;
+
         _resetAvailableTiles();
         _placeStarterTiles();
         _loadHighScore();

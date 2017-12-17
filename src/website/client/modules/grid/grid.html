@@ -20,7 +20,12 @@
         <div class="grid-row"></div>
         <div class="grid-row"></div>
     </div>
-    <div class="game-tiles">
+    <div class="game-tiles"
+         ng-swipe-up="vm.swipeUp()"
+         ng-swipe-down="vm.swipeDown()"
+         ng-swipe-left="vm.swipeLeft()"
+         ng-swipe-right="vm.swipeRight()"
+    >
         <tile ng-repeat="tile in vm.tiles" tile="tile"></tile>
     </div>
 </div>

@@ -4,6 +4,7 @@
 
 import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
+import swipe from 'angular-swipe';
 
 require('./common/directives');
 require('./common/filters');
@@ -16,6 +17,7 @@ require('./common/components');
 let app = angular.module('twentyFortyEight',
     [
         uiRouter,
+        'swipe',
 
         'twentyFortyEight.services',
         'twentyFortyEight.components',

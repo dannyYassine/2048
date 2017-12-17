@@ -1,6 +1,9 @@
 <div>
-    <div ng-if="vm.props.isGameOver">
-        GAME OVER
+    <div ng-if="vm.props.gameOver == true">
+        {{vm.onGameOver()}}
+    </div>
+    <div ng-if="vm.props.finished == true">
+        {{vm.playerWon()}}
     </div>
     <div class="main-content-layout home">
         <div class="home-header">
@@ -17,11 +20,23 @@
                     <p>Join the numbers and get to the <span class="tfe-bold">2048 tile!</span></p>
                 </div>
                 <div class="description-right">
-                    <button class="new-game-btn">NEW GAME</button>
+                    <button class="new-game-btn" ng-click="vm.onNewGameClicked()">NEW GAME</button>
                 </div>
             <div class="clear-float"></div>
             </div>
-            <grid></grid>
+            <grid keysEnabled="vm.keyboardEnabled"></grid>
+        </div>
+        <div class="footer">
+            <div class="danny-yassine-container">
+                <a href="https://www.linkedin.com/in/danny-yassine-1837a240/" target="_blank">
+                    Danny Yassine
+                </a>
+            </div>
+            <div class="github-img-container">
+                <a href="https://github.com/dannyYassine/2048" target="_blank">
+                    <img class="github-img" src="/img/github.png"/>
+                </a>
+            </div>
         </div>
     </div>
 </div>
