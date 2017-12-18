@@ -3,6 +3,8 @@
 ### Demo available at:
 https://dannyyassine-2048.herokuapp.com/
 
+![](https://github.com/dannyYassine/2048/blob/master/github/2048_gif.gif)
+
 ## Tools
 * AngularJS
 * Webpack
