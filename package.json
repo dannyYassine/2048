@@ -9,7 +9,7 @@
     "sync": "browser-sync start --proxy \"localhost:3002\" --files \"src/**/*\"",
     "nodemon": "nodemon src/server/index.js",
     "start": "forever src/server/index.js",
-    "deply": "git push heroku master"
+    "deploy": "git push heroku master"
   },
   "author": "",
   "license": "ISC",
