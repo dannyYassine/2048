@@ -8244,14 +8244,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(80);
 __webpack_require__(86);
 __webpack_require__(87);
-__webpack_require__(94);
+__webpack_require__(95);
 
 /**
  * Set Angular client
  */
 let app = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight', [__WEBPACK_IMPORTED_MODULE_1__uirouter_angularjs___default.a, 'swipe', 'twentyFortyEight.services', 'twentyFortyEight.components', 'twentyFortyEight.filters', 'twentyFortyEight.directives']);
 
-__webpack_require__(95);
+__webpack_require__(96);
 
 /**
  * Build config phase
@@ -62612,7 +62612,7 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.service
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = GameService;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model_Tile__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_randomNumberHelper__ = __webpack_require__(94);
 /**
  * Created by dannyyassine
  */
@@ -63076,7 +63076,7 @@ function GameService($window) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__uuid__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__uuid__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__uuid__);
 /**
  * Created by dannyyassine
@@ -63154,6 +63154,36 @@ function Tile(point, initialPosition, didMerged) {
 
 /***/ }),
 /* 93 */
+/***/ (function(module, exports) {
+
+/**
+ * Created by dannyyassine
+ */
+/**
+ * Helper to generate an UUID string
+ * @returns {string}
+ */
+function uuid() {
+    let uuid = "",
+        i,
+        random;
+    for (i = 0; i < 32; i++) {
+        random = Math.random() * 16 | 0;
+
+        if (i == 8 || i == 12 || i == 16 || i == 20) {
+            uuid += "-";
+        }
+        uuid += (i == 12 ? 4 : i == 16 ? random & 3 | 8 : random).toString(16);
+    }
+    return uuid;
+}
+
+module.exports = {
+    generate: uuid
+};
+
+/***/ }),
+/* 94 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63169,7 +63199,7 @@ const randomNumberHelper = function (leftBound, rightBound) {
 /* harmony default export */ __webpack_exports__["a"] = (randomNumberHelper);
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63185,29 +63215,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight.components', []);
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * Created by dannyyassine
  */
 
-__webpack_require__(96);
-__webpack_require__(99);
+__webpack_require__(97);
+__webpack_require__(101);
 
-__webpack_require__(103);
+__webpack_require__(105);
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__tile_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tile_controller__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tile_controller__ = __webpack_require__(100);
 /**
  * Created by dannyyassine
  */
@@ -63221,7 +63251,7 @@ __WEBPACK_IMPORTED_MODULE_1__tile_component___default.a.controller = __WEBPACK_I
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('tile', __WEBPACK_IMPORTED_MODULE_1__tile_component___default.a);
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -63232,29 +63262,55 @@ const TileComponent = {
     bindings: {
         tile: '<'
     },
-    template: __webpack_require__(98),
+    template: __webpack_require__(99),
     controllerAs: 'vm'
 };
 
 module.exports = TileComponent;
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tile tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
+module.exports = "<div class=\"tile tile-position-{{vm.tile.getX()}}-{{vm.tile.getY()}}\" ng-class=\"{'tile-fade-in': vm.isNew}\">\n    <h3 class=\"color-{{vm.tile.getValue()}}\">{{vm.tile.getValue()}}</h3>\n</div>";
 
 /***/ }),
-/* 99 */
+/* 100 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Created by dannyyassine
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = (TileController);
+function TileController($timeout) {
+    let vm = this;
+
+    vm.isNew = true;
+    vm.$onInit = $onInit;
+    vm.$postLink = $postLink;
+
+    function $onInit() {}
+
+    function $postLink() {
+        $timeout(() => {
+            vm.isNew = false;
+        }, 0.1, false);
+    }
+}
+
+/***/ }),
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__grid_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__grid_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__grid_controller__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__grid_controller__ = __webpack_require__(104);
 /**
  * Created by dannyyassine
  */
@@ -63269,7 +63325,7 @@ __WEBPACK_IMPORTED_MODULE_1__grid_component___default.a.$inject = ['$scope', '$d
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('grid', __WEBPACK_IMPORTED_MODULE_1__grid_component___default.a);
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -63280,20 +63336,20 @@ const GridComponent = {
     bindings: {
         keysEnabled: '<'
     },
-    template: __webpack_require__(101),
+    template: __webpack_require__(103),
     controllerAs: 'vm'
 };
 
 module.exports = GridComponent;
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\"\n         ng-swipe-up=\"vm.swipeUp()\"\n         ng-swipe-down=\"vm.swipeDown()\"\n         ng-swipe-left=\"vm.swipeLeft()\"\n         ng-swipe-right=\"vm.swipeRight()\"\n    >\n        <tile ng-repeat=\"tile in vm.tiles\" tile=\"tile\"></tile>\n    </div>\n</div>\n";
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63404,16 +63460,16 @@ const GridController = function ($scope, $document, gameService) {
 /* harmony default export */ __webpack_exports__["a"] = (GridController);
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_angular__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__app_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controller__ = __webpack_require__(108);
 /**
  * Created by dannyyassine
  */
@@ -63427,7 +63483,7 @@ __WEBPACK_IMPORTED_MODULE_2__app_controller__["a" /* default */].$inject = ['$sc
 __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').component('app', __WEBPACK_IMPORTED_MODULE_1__app_component___default.a);
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -63435,22 +63491,22 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').compo
  */
 
 module.exports = {
-  template: __webpack_require__(105),
+  template: __webpack_require__(107),
   controllerAs: 'vm'
 };
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = "<div>\n    <div ng-if=\"vm.props.gameOver == true\">\n        {{vm.onGameOver()}}\n    </div>\n    <div ng-if=\"vm.props.finished == true\">\n        {{vm.playerWon()}}\n    </div>\n    <div class=\"main-content-layout home\">\n        <div class=\"home-header\">\n            <div class=\"title-container\">\n                <h1 class=\"title title-color\">2048</h1>\n            </div>\n            <div class=\"score-container\">\n                <div dy-score points=\"vm.props.currentScore\" title=\"SCORE\"></div>\n                <div dy-score points=\"vm.props.highScore\" title=\"BEST\"></div>\n            </div>\n            <div class=\"description\">\n                <div class=\"description-left\">\n                    <p class=\"tfe-bold\">Play 2048 Game Online</p>\n                    <p>Join the numbers and get to <span class=\"tfe-bold\">2048!</span></p>\n                </div>\n                <div class=\"description-right\">\n                    <button class=\"new-game-btn\" ng-click=\"vm.onNewGameClicked()\">NEW GAME</button>\n                </div>\n            <div class=\"clear-float\"></div>\n            </div>\n            <grid keysEnabled=\"vm.keyboardEnabled\"></grid>\n        </div>\n        <div class=\"footer\">\n            <div class=\"danny-yassine-container\">\n                <a href=\"https://www.linkedin.com/in/danny-yassine-1837a240/\" target=\"_blank\">\n                    Danny Yassine\n                </a>\n            </div>\n            <div class=\"github-img-container\">\n                <a href=\"https://github.com/dannyYassine/2048\" target=\"_blank\">\n                    <img class=\"github-img\" src=\"/img/github.png\"/>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>";
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
 /**
  * Created by dannyyassine
@@ -63539,7 +63595,7 @@ function AppController($scope, gameService) {
 }
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -65413,50 +65469,6 @@ return sweetAlert$1;
 })));
 if (typeof window !== 'undefined' && window.Sweetalert2) window.sweetAlert = window.swal = window.Sweetalert2;
 
-
-/***/ }),
-/* 108 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * Created by dannyyassine
- */
-
-/* harmony default export */ __webpack_exports__["a"] = (TileController);
-function TileController($timeout) {
-  let vm = this;
-}
-
-/***/ }),
-/* 109 */
-/***/ (function(module, exports) {
-
-/**
- * Created by dannyyassine
- */
-/**
- * Helper to generate an UUID string
- * @returns {string}
- */
-function uuid() {
-    let uuid = "",
-        i,
-        random;
-    for (i = 0; i < 32; i++) {
-        random = Math.random() * 16 | 0;
-
-        if (i == 8 || i == 12 || i == 16 || i == 20) {
-            uuid += "-";
-        }
-        uuid += (i == 12 ? 4 : i == 16 ? random & 3 | 8 : random).toString(16);
-    }
-    return uuid;
-}
-
-module.exports = {
-    generate: uuid
-};
 
 /***/ })
 /******/ ]);

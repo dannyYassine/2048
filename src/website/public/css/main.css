@@ -855,8 +855,7 @@ p {
   align-items: center;
   justify-content: center;
 }
-.tile-fade-in,
-.game-tiles .tile {
+.tile-fade-in {
   animation-duration: 0.25s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
