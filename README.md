@@ -4,15 +4,16 @@
 https://dannyyassine-2048.herokuapp.com/
 
 ## Tools
+* AngularJS
+* Webpack
+* less
+* Gulp
+* Browser-sync
+* ES6 (ES5 compability)
+* Babel
 * node.js
 * Express
 * nodemon
-* Browser-sync
-* AngularJS
-* Babel
-* Webpack
-* .less
-* Gulp
 
 ## App
 ![](https://github.com/dannyYassine/2048/blob/master/github/app.png)
