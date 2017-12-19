@@ -11,7 +11,7 @@ function TileController($timeout) {
     vm.$postLink = $postLink;
 
     function $onInit() {
-        
+
     }
 
     function $postLink() {
