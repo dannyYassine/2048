@@ -2,10 +2,11 @@
  * Created by dannyyassine
  */
 
-const GridController = function ($scope, $document, gameService) {
+export default GridController;
+function GridController($scope, $document, gameService) {
     let vm = this;
 
-    vm.tiles = gameService.props.tiles;
+    vm.props = gameService.props;
 
     vm.$onInit = $onInit;
     vm.$onChanges = $onChanges;
@@ -39,28 +40,22 @@ const GridController = function ($scope, $document, gameService) {
             if (gameService.props.gameOver) {
                 return;
             }
-            if (keyboardKeys.up === event.which) {
-                _checkThrottle(() => {
+            _checkThrottle(() => {
+                if (keyboardKeys.up === event.which) {
                     gameService.moveUp();
                     event.preventDefault();
-                });
-            } else if (keyboardKeys.down === event.which) {
-                _checkThrottle(() => {
+                } else if (keyboardKeys.down === event.which) {
                     gameService.moveDown();
                     event.preventDefault();
-                });
-            } else if (keyboardKeys.left === event.which) {
-                _checkThrottle(() => {
+                } else if (keyboardKeys.left === event.which) {
                     gameService.moveLeft();
                     event.preventDefault();
-                });
-            } else if (keyboardKeys.right === event.which) {
-                _checkThrottle(() => {
+                } else if (keyboardKeys.right === event.which) {
                     gameService.moveRight();
                     event.preventDefault();
-                });
-            }
-            $scope.$apply();
+                }
+                $scope.$evalAsync()
+            });
         });
     }
 
@@ -77,31 +72,26 @@ const GridController = function ($scope, $document, gameService) {
     function swipeUp() {
         _checkThrottle(() => {
             gameService.moveUp();
-            $scope.$apply();
         });
     }
 
     function swipeDown() {
         _checkThrottle(() => {
             gameService.moveDown();
-            $scope.$apply();
         });
     }
 
     function swipeLeft() {
         _checkThrottle(() => {
             gameService.moveLeft();
-            $scope.$apply();
         });
     }
 
     function swipeRight() {
         _checkThrottle(() => {
             gameService.moveRight();
-            $scope.$apply();
         });
     }
 
 };
 
-export default GridController;

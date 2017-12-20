@@ -9,7 +9,6 @@ function AppController($scope, gameService) {
     let vm = this;
 
     vm.props = gameService.props;
-    vm.keyboardEnabled = true;
 
     vm.$onInit = $onInit;
     vm.$postLink = $postLink;
@@ -34,9 +33,8 @@ function AppController($scope, gameService) {
      */
 
     function resetGame() {
-        vm.keyboardEnabled = true;
         gameService.startGame();
-        $scope.$apply();
+        $scope.$evalAsync();
     }
 
     function onNewGameClicked() {

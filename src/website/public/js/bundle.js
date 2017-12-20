@@ -62657,7 +62657,7 @@ function GameService($window) {
     /**
      * Module
      */
-    let props = {
+    const props = {
         tiles,
         currentScore,
         highScore,
@@ -62746,8 +62746,8 @@ function GameService($window) {
 
                 _verifyHighScore();
             } else {
+
                 // Move tile
-                //TODO: positon internal not updating
                 let tilePosition = tile.getPosition();
 
                 if (tilePosition.x !== newPosition.x || tilePosition.y !== newPosition.y) {
@@ -62755,8 +62755,6 @@ function GameService($window) {
                 }
 
                 tile.setPosition(newPosition);
-                tile.x = newPosition.x;
-                tile.y = newPosition.y;
             }
         }
 
@@ -62806,6 +62804,12 @@ function GameService($window) {
         return false;
     }
 
+    /**
+     * Maps tiles array to an array of positions
+     * @param direction
+     * @returns {[*,*,*,*]}
+     * @private
+     */
     function _orderedTilesWithDirection(direction) {
         if (direction.x === -1.0) {
             let section1 = [];
@@ -62968,20 +62972,6 @@ function GameService($window) {
         return null;
     }
 
-    function _removeAvailableTile(tile) {
-        for (let index in availableTiles) {
-            if (availableTiles[index].getPosition() === tile.getPosition()) {
-                availableTiles.splice(index, 1);
-                break;
-            }
-        }
-    }
-
-    function _addAvailableTile(tile) {
-        let emptyTile = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(null, tile.getPosition());
-        availableTiles.push(emptyTile);
-    }
-
     /**
      * Returns an available tile and removes it from the available tiles array
      * @returns {*}
@@ -63024,10 +63014,6 @@ function GameService($window) {
         _resetAvailableTiles();
         _placeStarterTiles();
         _loadHighScore();
-    }
-
-    function _getTileIndex(tile) {
-        return tile.getY * gameSize + tile.getX();
     }
 
     function _placeNewRandomTile() {
@@ -63333,9 +63319,7 @@ __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module('twentyFortyEight').compo
  */
 
 const GridComponent = {
-    bindings: {
-        keysEnabled: '<'
-    },
+    bindings: {},
     template: __webpack_require__(103),
     controllerAs: 'vm'
 };
@@ -63346,7 +63330,7 @@ module.exports = GridComponent;
 /* 103 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\"\n         ng-swipe-up=\"vm.swipeUp()\"\n         ng-swipe-down=\"vm.swipeDown()\"\n         ng-swipe-left=\"vm.swipeLeft()\"\n         ng-swipe-right=\"vm.swipeRight()\"\n    >\n        <tile ng-repeat=\"tile in vm.tiles\" tile=\"tile\"></tile>\n    </div>\n</div>\n";
+module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\"\n         ng-swipe-up=\"vm.swipeUp()\"\n         ng-swipe-down=\"vm.swipeDown()\"\n         ng-swipe-left=\"vm.swipeLeft()\"\n         ng-swipe-right=\"vm.swipeRight()\"\n    >\n        <tile ng-repeat=\"tile in vm.props.tiles\" tile=\"::tile\"></tile>\n    </div>\n</div>\n";
 
 /***/ }),
 /* 104 */
@@ -63357,10 +63341,11 @@ module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\
  * Created by dannyyassine
  */
 
-const GridController = function ($scope, $document, gameService) {
+/* harmony default export */ __webpack_exports__["a"] = (GridController);
+function GridController($scope, $document, gameService) {
     let vm = this;
 
-    vm.tiles = gameService.props.tiles;
+    vm.props = gameService.props;
 
     vm.$onInit = $onInit;
     vm.$onChanges = $onChanges;
@@ -63393,28 +63378,22 @@ const GridController = function ($scope, $document, gameService) {
             if (gameService.props.gameOver) {
                 return;
             }
-            if (keyboardKeys.up === event.which) {
-                _checkThrottle(() => {
+            _checkThrottle(() => {
+                if (keyboardKeys.up === event.which) {
                     gameService.moveUp();
                     event.preventDefault();
-                });
-            } else if (keyboardKeys.down === event.which) {
-                _checkThrottle(() => {
+                } else if (keyboardKeys.down === event.which) {
                     gameService.moveDown();
                     event.preventDefault();
-                });
-            } else if (keyboardKeys.left === event.which) {
-                _checkThrottle(() => {
+                } else if (keyboardKeys.left === event.which) {
                     gameService.moveLeft();
                     event.preventDefault();
-                });
-            } else if (keyboardKeys.right === event.which) {
-                _checkThrottle(() => {
+                } else if (keyboardKeys.right === event.which) {
                     gameService.moveRight();
                     event.preventDefault();
-                });
-            }
-            $scope.$apply();
+                }
+                $scope.$evalAsync();
+            });
         });
     }
 
@@ -63431,33 +63410,27 @@ const GridController = function ($scope, $document, gameService) {
     function swipeUp() {
         _checkThrottle(() => {
             gameService.moveUp();
-            $scope.$apply();
         });
     }
 
     function swipeDown() {
         _checkThrottle(() => {
             gameService.moveDown();
-            $scope.$apply();
         });
     }
 
     function swipeLeft() {
         _checkThrottle(() => {
             gameService.moveLeft();
-            $scope.$apply();
         });
     }
 
     function swipeRight() {
         _checkThrottle(() => {
             gameService.moveRight();
-            $scope.$apply();
         });
     }
 };
-
-/* harmony default export */ __webpack_exports__["a"] = (GridController);
 
 /***/ }),
 /* 105 */
@@ -63499,7 +63472,7 @@ module.exports = {
 /* 107 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <div ng-if=\"vm.props.gameOver == true\">\n        {{vm.onGameOver()}}\n    </div>\n    <div ng-if=\"vm.props.finished == true\">\n        {{vm.playerWon()}}\n    </div>\n    <div class=\"main-content-layout home\">\n        <div class=\"home-header\">\n            <div class=\"title-container\">\n                <h1 class=\"title title-color\">2048</h1>\n            </div>\n            <div class=\"score-container\">\n                <div dy-score points=\"vm.props.currentScore\" title=\"SCORE\"></div>\n                <div dy-score points=\"vm.props.highScore\" title=\"BEST\"></div>\n            </div>\n            <div class=\"description\">\n                <div class=\"description-left\">\n                    <p class=\"tfe-bold\">Play 2048 Game Online</p>\n                    <p>Join the numbers and get to <span class=\"tfe-bold\">2048!</span></p>\n                </div>\n                <div class=\"description-right\">\n                    <button class=\"new-game-btn\" ng-click=\"vm.onNewGameClicked()\">NEW GAME</button>\n                </div>\n            <div class=\"clear-float\"></div>\n            </div>\n            <grid keysEnabled=\"vm.keyboardEnabled\"></grid>\n        </div>\n        <div class=\"footer\">\n            <div class=\"danny-yassine-container\">\n                <a href=\"https://www.linkedin.com/in/danny-yassine-1837a240/\" target=\"_blank\">\n                    Danny Yassine\n                </a>\n            </div>\n            <div class=\"github-img-container\">\n                <a href=\"https://github.com/dannyYassine/2048\" target=\"_blank\">\n                    <img class=\"github-img\" src=\"/img/github.png\"/>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>";
+module.exports = "<div>\n    <div ng-if=\"vm.props.gameOver == true\">\n        {{vm.onGameOver()}}\n    </div>\n    <div ng-if=\"vm.props.finished == true\">\n        {{vm.playerWon()}}\n    </div>\n    <div class=\"main-content-layout home\">\n        <div class=\"home-header\">\n            <div class=\"title-container\">\n                <h1 class=\"title title-color\">2048</h1>\n            </div>\n            <div class=\"score-container\">\n                <div dy-score points=\"vm.props.currentScore\" title=\"SCORE\"></div>\n                <div dy-score points=\"vm.props.highScore\" title=\"BEST\"></div>\n            </div>\n            <div class=\"description\">\n                <div class=\"description-left\">\n                    <p class=\"tfe-bold\">Play 2048 Game Online</p>\n                    <p>Join the numbers and get to <span class=\"tfe-bold\">2048!</span></p>\n                </div>\n                <div class=\"description-right\">\n                    <button class=\"new-game-btn\" ng-click=\"vm.onNewGameClicked()\">NEW GAME</button>\n                </div>\n            <div class=\"clear-float\"></div>\n            </div>\n            <grid></grid>\n        </div>\n        <div class=\"footer\">\n            <div class=\"danny-yassine-container\">\n                <a href=\"https://www.linkedin.com/in/danny-yassine-1837a240/\" target=\"_blank\">\n                    Danny Yassine\n                </a>\n            </div>\n            <div class=\"github-img-container\">\n                <a href=\"https://github.com/dannyYassine/2048\" target=\"_blank\">\n                    <img class=\"github-img\" src=\"/img/github.png\"/>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>";
 
 /***/ }),
 /* 108 */
@@ -63519,7 +63492,6 @@ function AppController($scope, gameService) {
     let vm = this;
 
     vm.props = gameService.props;
-    vm.keyboardEnabled = true;
 
     vm.$onInit = $onInit;
     vm.$postLink = $postLink;
@@ -63542,9 +63514,8 @@ function AppController($scope, gameService) {
      */
 
     function resetGame() {
-        vm.keyboardEnabled = true;
         gameService.startGame();
-        $scope.$apply();
+        $scope.$evalAsync();
     }
 
     function onNewGameClicked() {

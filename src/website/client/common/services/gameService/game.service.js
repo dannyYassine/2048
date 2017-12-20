@@ -42,7 +42,7 @@ export default function GameService($window) {
     /**
      * Module
      */
-    let props = {
+    const props = {
         tiles,
         currentScore,
         highScore,
@@ -132,8 +132,8 @@ export default function GameService($window) {
                 _verifyHighScore();
                 
             } else {
+
                 // Move tile
-                //TODO: positon internal not updating
                 let tilePosition = tile.getPosition();
 
                 if (tilePosition.x !== newPosition.x || tilePosition.y !== newPosition.y) {
@@ -141,8 +141,6 @@ export default function GameService($window) {
                 }
 
                 tile.setPosition(newPosition);
-                tile.x = newPosition.x;
-                tile.y = newPosition.y;
 
             }
 
@@ -194,7 +192,13 @@ export default function GameService($window) {
         }
         return false;
     }
-    
+
+    /**
+     * Maps tiles array to an array of positions
+     * @param direction
+     * @returns {[*,*,*,*]}
+     * @private
+     */
     function _orderedTilesWithDirection(direction) {
         if (direction.x === -1.0) {
             let section1 = [];
@@ -357,20 +361,6 @@ export default function GameService($window) {
         return null;
     }
 
-    function _removeAvailableTile(tile) {
-        for (let index in availableTiles) {
-            if (availableTiles[index].getPosition() === tile.getPosition()) {
-                availableTiles.splice(index, 1);
-                break;
-            }
-        }
-    }
-
-    function _addAvailableTile(tile) {
-        let emptyTile = Tile(null, tile.getPosition());
-        availableTiles.push(emptyTile);
-    }
-
     /**
      * Returns an available tile and removes it from the available tiles array
      * @returns {*}
@@ -415,9 +405,6 @@ export default function GameService($window) {
         _loadHighScore();
     }
 
-    function _getTileIndex(tile) {
-        return tile.getY * gameSize + tile.getX();
-    }
 
     function _placeNewRandomTile() {
         _reCalculateAvailableTiles();
