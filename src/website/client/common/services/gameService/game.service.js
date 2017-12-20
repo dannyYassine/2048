@@ -141,7 +141,8 @@ export default function GameService($window) {
                 }
 
                 tile.setPosition(newPosition);
-
+                tile.x = newPosition.x;
+                tile.y = newPosition.y;
             }
 
         }
@@ -164,7 +165,6 @@ export default function GameService($window) {
         });
 
         props.tiles.forEach((tile) => {
-            //TODO:
             tile.merged = false;
         });
     }

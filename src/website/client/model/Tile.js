@@ -49,22 +49,18 @@ function Tile(point, initialPosition, didMerged) {
     }
 
     function setPosition(newPosition) {
-        position = newPosition;
-        x = position.x;
-        y = position.y;
-        // position.x = newPosition.x;
-        // position.y = newPosition.y;
+        position.x = newPosition.x;
+        position.y = newPosition.y;
     }
 
     function setX(newX) {
-        console.log(newX);
-        if (newX < 1 || newX > 4) { return; }
         position.x = newX;
+        x = newX;
     }
 
     function setY(newY) {
-        if (newY < 1 || newY > 4) { return; }
         position.y = newY;
+        y = newY;
     }
 
 };
