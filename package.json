@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server/index.js",
   "scripts": {
+    "bundle-js": "webpack --config webpack.config.js",
     "watch": "webpack --watch --config webpack.config.js",
     "serve": "nodemon src/server/index.js --watch src/website -e css,html",
     "sync": "browser-sync start --proxy \"localhost:3002\" --files \"src/**/*\"",

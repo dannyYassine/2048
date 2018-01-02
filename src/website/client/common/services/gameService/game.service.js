@@ -125,7 +125,7 @@ export default function GameService($window) {
 
                 props.currentScore += nextTile.getValue();
 
-                if (props.currentScore >= scoreToWin) {
+                if (_didPlayerWin()) {
                     props.finished = true;
                 }
 
@@ -167,6 +167,17 @@ export default function GameService($window) {
         props.tiles.forEach((tile) => {
             tile.merged = false;
         });
+    }
+
+    function _didPlayerWin() {
+        for (let index in props.tiles) {
+            let tile = props.tiles[index];
+            if (tile.getValue() >= scoreToWin) {
+               console.log(scoreToWin, tile.getValue());
+               return true;
+           }
+        }
+        return false;
     }
 
     function _anyMovesAvailable() {
@@ -380,10 +391,10 @@ export default function GameService($window) {
      */
     function _placeStarterTiles() {
         let position1 = _getRandomAvailableTile().getPosition();
-        let tile1 = Tile(4, {x: position1.x, y: position1.y});
+        let tile1 = Tile(1024, {x: position1.x, y: position1.y});
 
         let position2 = _getRandomAvailableTile().getPosition();
-        let tile2 = Tile(2, {x: position2.x, y: position2.y});
+        let tile2 = Tile(1024, {x: position2.x, y: position2.y});
 
         props.tiles.push(tile1);
         props.tiles.push(tile2);
@@ -414,10 +425,6 @@ export default function GameService($window) {
             let newTile = Tile(2, newAvailableTile.getPosition());
             props.tiles.push(newTile);
         }
-    }
-
-    function _placeNewTile(tile) {
-        props.tiles.push(tile);
     }
 
     function _deleteTile(tile) {

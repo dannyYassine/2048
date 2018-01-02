@@ -37,7 +37,7 @@ function GridController($scope, $document, gameService) {
     
     function _initKeyboardTouchEvents() {
         $document.bind('keydown', function(event) {
-            if (gameService.props.gameOver) {
+            if (gameService.props.gameOver || gameService.props.finished) {
                 return;
             }
             _checkThrottle(() => {
