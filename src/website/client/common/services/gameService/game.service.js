@@ -391,10 +391,10 @@ export default function GameService($window) {
      */
     function _placeStarterTiles() {
         let position1 = _getRandomAvailableTile().getPosition();
-        let tile1 = Tile(1024, {x: position1.x, y: position1.y});
+        let tile1 = Tile(4, {x: position1.x, y: position1.y});
 
         let position2 = _getRandomAvailableTile().getPosition();
-        let tile2 = Tile(1024, {x: position2.x, y: position2.y});
+        let tile2 = Tile(2, {x: position2.x, y: position2.y});
 
         props.tiles.push(tile1);
         props.tiles.push(tile2);
