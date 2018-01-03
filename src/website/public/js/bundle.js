@@ -62782,7 +62782,6 @@ function GameService($window) {
     }
 
     function _didPlayerWin() {
-
         for (let index in props.tiles) {
             let tile = props.tiles[index];
             if (tile.getValue() >= scoreToWin) {
@@ -62790,7 +62789,6 @@ function GameService($window) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -63005,10 +63003,10 @@ function GameService($window) {
      */
     function _placeStarterTiles() {
         let position1 = _getRandomAvailableTile().getPosition();
-        let tile1 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(1024, { x: position1.x, y: position1.y });
+        let tile1 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(4, { x: position1.x, y: position1.y });
 
         let position2 = _getRandomAvailableTile().getPosition();
-        let tile2 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(1024, { x: position2.x, y: position2.y });
+        let tile2 = Object(__WEBPACK_IMPORTED_MODULE_0__model_Tile__["a" /* default */])(2, { x: position2.x, y: position2.y });
 
         props.tiles.push(tile1);
         props.tiles.push(tile2);
@@ -63030,6 +63028,10 @@ function GameService($window) {
         _loadHighScore();
     }
 
+    /**
+     * Places a new tile in game from available tiles
+     * @private
+     */
     function _placeNewRandomTile() {
         _reCalculateAvailableTiles();
 
@@ -63040,6 +63042,11 @@ function GameService($window) {
         }
     }
 
+    /**
+     * Deletes tile passed from argument
+     * @param tile
+     * @private
+     */
     function _deleteTile(tile) {
         for (let index in props.tiles) {
             if (props.tiles[index].getX() === tile.getX() && props.tiles[index].getY() === tile.getY()) {
@@ -63049,10 +63056,18 @@ function GameService($window) {
         }
     }
 
+    /**
+     * Loads high score into memory
+     * @private
+     */
     function _loadHighScore() {
         props.highScore = $window.localStorage.getItem('tfe.highScore') || 0;
     }
 
+    /**
+     * Sets high score if needed
+     * @private
+     */
     function _verifyHighScore() {
         let localHighScore = $window.localStorage.getItem('tfe.highScore');
         if (!localHighScore) {
@@ -63377,7 +63392,7 @@ function GridController($scope, $document, gameService) {
 
     function _initKeyboardTouchEvents() {
         $document.bind('keydown', function (event) {
-            if (gameService.props.gameOver) {
+            if (gameService.props.gameOver || gameService.props.finished) {
                 return;
             }
             _checkThrottle(() => {
