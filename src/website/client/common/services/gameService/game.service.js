@@ -417,6 +417,10 @@ export default function GameService($window) {
     }
 
 
+    /**
+     * Places a new tile in game from available tiles
+     * @private
+     */
     function _placeNewRandomTile() {
         _reCalculateAvailableTiles();
 
@@ -427,6 +431,11 @@ export default function GameService($window) {
         }
     }
 
+    /**
+     * Deletes tile passed from argument
+     * @param tile
+     * @private
+     */
     function _deleteTile(tile) {
         for (let index in props.tiles) {
             if (props.tiles[index].getX() === tile.getX() && props.tiles[index].getY() === tile.getY()) {
@@ -436,10 +445,18 @@ export default function GameService($window) {
         }
     }
 
+    /**
+     * Loads high score into memory
+     * @private
+     */
     function _loadHighScore() {
         props.highScore = $window.localStorage.getItem('tfe.highScore') || 0;
     }
 
+    /**
+     * Sets high score if needed
+     * @private
+     */
     function _verifyHighScore() {
         let localHighScore = $window.localStorage.getItem('tfe.highScore');
         if (!localHighScore) {
