@@ -13,7 +13,7 @@ function Tile(point, initialPosition, didMerged) {
     let x = 1;
     let y = 1;
 
-    return {
+    return Object.freeze({
         id,
         x: position.x,
         y: position.y,
@@ -26,7 +26,7 @@ function Tile(point, initialPosition, didMerged) {
         setX:       setX,
         setY:       setY,
         setPosition: setPosition
-    };
+    });
 
     function getValue() {
         return value;
@@ -63,4 +63,4 @@ function Tile(point, initialPosition, didMerged) {
         y = newY;
     }
 
-};
+}
