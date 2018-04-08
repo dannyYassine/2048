@@ -1,47 +1,39 @@
-<div>
-    <div ng-if="vm.props.gameOver == true">
-        {{vm.onGameOver()}}
-    </div>
-    <div ng-if="vm.props.finished == true">
-        {{vm.playerWon()}}
-    </div>
-    <div class="main-content-layout home">
-        <div class="home-header">
-            <div class="title-container">
-                <h1 class="title title-color">2048</h1>
-            </div>
-            <div class="score-container">
-                <div dy-score points="vm.props.currentScore" title="SCORE"></div>
-                <div dy-score points="vm.props.highScore" title="BEST"></div>
-            </div>
-            <div class="description">
-                <div class="description-left">
-                    <p class="tfe-bold">Play 2048 Game Online</p>
-                    <p>Join the numbers and get to <span class="tfe-bold">2048!</span></p>
-                </div>
-                <div class="description-right">
-                    <button class="new-game-btn" ng-click="vm.onNewGameClicked()">NEW GAME</button>
-                </div>
-            <div class="clear-float"></div>
-            </div>
-            <grid></grid>
+<div class="main-content-layout home">
+    <div class="home-header">
+        <div class="title-container">
+            <h1 class="title title-color">2048</h1>
         </div>
-        <div class="footer">
-            <div class="danny-yassine-container">
-                <a href="https://www.linkedin.com/in/danny-yassine-1837a240/" target="_blank">
-                    Danny Yassine
-                </a>
+        <div class="score-container">
+            <div dy-score points="vm.props.currentScore" title="SCORE"></div>
+            <div dy-score points="vm.props.highScore" title="BEST"></div>
+        </div>
+        <div class="description">
+            <div class="description-left">
+                <p class="tfe-bold">Play 2048 Game Online</p>
+                <p>Join the numbers and get to <span class="tfe-bold">2048!</span></p>
             </div>
-            <div class="danny-yassine-container">
-                <a href="https://s3.amazonaws.com/dannyyassine-spa/2048/2048.zip" download>
-                    Download app
-                </a>
+            <div class="description-right">
+                <button class="new-game-btn" ng-click="vm.onNewGameClicked()">NEW GAME</button>
             </div>
-            <div class="github-img-container">
-                <a href="https://github.com/dannyYassine/2048" target="_blank">
-                    <img class="github-img" src="/img/github.png"/>
-                </a>
-            </div>
+            <div class="clear-float"></div>
+        </div>
+        <grid></grid>
+    </div>
+    <div class="footer">
+        <div class="danny-yassine-container">
+            <a href="https://www.linkedin.com/in/danny-yassine-1837a240/" target="_blank">
+                Danny Yassine
+            </a>
+        </div>
+        <div class="danny-yassine-container">
+            <a href="https://s3.amazonaws.com/dannyyassine-spa/2048/2048.zip" download>
+                Download app
+            </a>
+        </div>
+        <div class="github-img-container">
+            <a href="https://github.com/dannyYassine/2048" target="_blank">
+                <img class="github-img" src="/img/github.png"/>
+            </a>
         </div>
     </div>
 </div>

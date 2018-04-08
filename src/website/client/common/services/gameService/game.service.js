@@ -1,11 +1,14 @@
 /**
  * Created by dannyyassine
  */
+const EventEmitter = require('wolfy87-eventemitter');
 
 import Tile from './../../../model/Tile';
 import randomNumberHelper from './../../helpers/randomNumberHelper';
 
 export default function GameService($window) {
+    let eventEmitter = new EventEmitter();
+
     /**
      * Placed tiles on screen
      * @type {Array}
@@ -57,6 +60,10 @@ export default function GameService($window) {
         moveDown: moveDown,
         moveLeft: moveLeft,
         moveRight: moveRight,
+
+        onScoreIncreased: onScoreIncreased,
+        onGameWon: onGameWon,
+        onGameOver: onGameOver
     };
 
     /**
@@ -88,6 +95,7 @@ export default function GameService($window) {
 
         _setupBeforeMove();
         let ordered = _orderedTilesWithDirection(direction);
+        const originalScore = props.currentScore;
 
         for (let tileIndex in ordered) {
             let tile = _tileAtPosition(ordered[tileIndex]);
@@ -127,6 +135,7 @@ export default function GameService($window) {
 
                 if (_didPlayerWin()) {
                     props.finished = true;
+                    eventEmitter.emit('GameService:onGameWon');
                 }
 
                 _verifyHighScore();
@@ -147,6 +156,10 @@ export default function GameService($window) {
 
         }
 
+        if (props.currentScore > originalScore) {
+            eventEmitter.emit('GameService:onScoreIncreased', props.currentScore - originalScore);
+        }
+
         // verify game
         if (didTilesMoved) {
             _placeNewRandomTile();
@@ -154,8 +167,19 @@ export default function GameService($window) {
 
         if (!_anyMovesAvailable()) {
             props.gameOver = true;
+            eventEmitter.emit('GameService:onGameOver');
         }
 
+    }
+
+    function onScoreIncreased(cb) {
+        eventEmitter.on('GameService:onScoreIncreased', cb);
+    }
+    function onGameWon(cb) {
+        eventEmitter.on('GameService:onGameWon', cb);
+    }
+    function onGameOver(cb) {
+        eventEmitter.on('GameService:onGameOver', cb);
     }
 
     function _setupBeforeMove() {

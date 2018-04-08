@@ -37,24 +37,25 @@ function GridController($scope, $document, gameService) {
     
     function _initKeyboardTouchEvents() {
         $document.bind('keydown', function(event) {
-            if (gameService.props.gameOver || gameService.props.finished) {
-                return;
-            }
-            _checkThrottle(() => {
-                if (keyboardKeys.up === event.which) {
-                    gameService.moveUp();
-                    event.preventDefault();
-                } else if (keyboardKeys.down === event.which) {
-                    gameService.moveDown();
-                    event.preventDefault();
-                } else if (keyboardKeys.left === event.which) {
-                    gameService.moveLeft();
-                    event.preventDefault();
-                } else if (keyboardKeys.right === event.which) {
-                    gameService.moveRight();
-                    event.preventDefault();
+            $scope.$evalAsync(() => {
+                if (gameService.props.gameOver || gameService.props.finished) {
+                    return;
                 }
-                $scope.$evalAsync()
+                _checkThrottle(() => {
+                    if (keyboardKeys.up === event.which) {
+                        gameService.moveUp();
+                        event.preventDefault();
+                    } else if (keyboardKeys.down === event.which) {
+                        gameService.moveDown();
+                        event.preventDefault();
+                    } else if (keyboardKeys.left === event.which) {
+                        gameService.moveLeft();
+                        event.preventDefault();
+                    } else if (keyboardKeys.right === event.which) {
+                        gameService.moveRight();
+                        event.preventDefault();
+                    }
+                });
             });
         });
     }

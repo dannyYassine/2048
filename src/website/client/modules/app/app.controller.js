@@ -12,20 +12,30 @@ function AppController($scope, gameService) {
 
     vm.$onInit = $onInit;
     vm.$postLink = $postLink;
+    vm.$onDestroy = $onDestroy;
 
     vm.onNewGameClicked = onNewGameClicked;
     vm.onGameOver = onGameOver;
     vm.playerWon = playerWon;
 
     /**
-     * Life cyles
+     * Life cycles
      */
     function $onInit() {
-
+        gameService.onScoreIncreased(_onScoreIncreased);
+        gameService.onGameWon(playerWon);
+        gameService.onGameOver(onGameOver);
     }
 
     function $postLink() {
         gameService.startGame();
+    }
+
+    function $onDestroy() {
+    }
+
+    function _onScoreIncreased(scoreDiff) {
+        console.log(scoreDiff);
     }
 
     /**
