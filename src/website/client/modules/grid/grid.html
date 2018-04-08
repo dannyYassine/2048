@@ -26,6 +26,6 @@
          ng-swipe-left="vm.swipeLeft()"
          ng-swipe-right="vm.swipeRight()"
     >
-        <tile ng-repeat="tile in vm.props.tiles track by tile.id" tile="tile"></tile>
+        <tile ng-repeat="tile in vm.props.tiles" tile="::tile"></tile>
     </div>
 </div>
