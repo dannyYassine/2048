@@ -120,7 +120,7 @@ export default function GameService($window) {
                 didTilesMoved = true;
                 nextTile.setValue(tile.getValue() * 2);
                 nextTile.merged = true;
-
+                // tile.setPosition(nextTile.getPosition());
                 _deleteTile(tile);
 
                 props.currentScore += nextTile.getValue();

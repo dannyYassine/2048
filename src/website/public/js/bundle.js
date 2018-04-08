@@ -62982,7 +62982,7 @@ function GameService($window) {
                 didTilesMoved = true;
                 nextTile.setValue(tile.getValue() * 2);
                 nextTile.merged = true;
-
+                // tile.setPosition(nextTile.getPosition());
                 _deleteTile(tile);
 
                 props.currentScore += nextTile.getValue();
@@ -63351,7 +63351,7 @@ function Tile(point, initialPosition, didMerged) {
     let x = 1;
     let y = 1;
 
-    return Object.freeze({
+    return {
         id,
         x: position.x,
         y: position.y,
@@ -63364,7 +63364,7 @@ function Tile(point, initialPosition, didMerged) {
         setX: setX,
         setY: setY,
         setPosition: setPosition
-    });
+    };
 
     function getValue() {
         return value;
@@ -63389,6 +63389,8 @@ function Tile(point, initialPosition, didMerged) {
     function setPosition(newPosition) {
         position.x = newPosition.x;
         position.y = newPosition.y;
+        x = newPosition.x;
+        y = newPosition.y;
     }
 
     function setX(newX) {
@@ -63594,7 +63596,7 @@ module.exports = GridComponent;
 /* 103 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\"\n         ng-swipe-up=\"vm.swipeUp()\"\n         ng-swipe-down=\"vm.swipeDown()\"\n         ng-swipe-left=\"vm.swipeLeft()\"\n         ng-swipe-right=\"vm.swipeRight()\"\n    >\n        <tile ng-repeat=\"tile in vm.props.tiles\" tile=\"::tile\"></tile>\n    </div>\n</div>\n";
+module.exports = "<div class=\"grid-container\">\n    <div class=\"game-grid\">\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n        <div class=\"grid-row\"></div>\n    </div>\n    <div class=\"game-tiles\"\n         ng-swipe-up=\"vm.swipeUp()\"\n         ng-swipe-down=\"vm.swipeDown()\"\n         ng-swipe-left=\"vm.swipeLeft()\"\n         ng-swipe-right=\"vm.swipeRight()\"\n    >\n        <tile ng-repeat=\"tile in vm.props.tiles track by tile.id\" tile=\"tile\"></tile>\n    </div>\n</div>\n";
 
 /***/ }),
 /* 104 */
