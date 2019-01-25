@@ -11,7 +11,7 @@ $directory = '/2048/src/website/public';
     <link rel="stylesheet" href="<?=$directory?>/css/main.css"/>
     <link rel="stylesheet" href="<?=$directory?>/css/fontawesome-all.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/">
+    <base href="/2048">
 </head>
 <body>
 <app></app>
