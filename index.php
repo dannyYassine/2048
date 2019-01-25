@@ -1,5 +1,5 @@
 <?php
-$directory = '/2048/src/website/public';
+$directory = '/projects/2048/src/website/public';
 ?>
 
 <!DOCTYPE html>
